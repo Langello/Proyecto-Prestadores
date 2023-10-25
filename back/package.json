@@ -1,0 +1,15 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "proyecto prestadores UTN",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Gastón Langellotti",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
