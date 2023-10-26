@@ -10,6 +10,8 @@ export async function crearUsuario(req, res) {
     telefono,
     tipo_dni,
     tipo_id,
+    foto_perfil,
+    fecha_nacimiento
   } = req.body;
 
   return await Usuario.create({
@@ -21,6 +23,8 @@ export async function crearUsuario(req, res) {
     telefono,
     tipo_dni,
     tipo_id,
+    foto_perfil,
+    fecha_nacimiento
   })
     .then((usuario) => {
       res.status(201).json(usuario);
