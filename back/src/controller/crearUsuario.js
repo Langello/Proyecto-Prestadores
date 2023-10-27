@@ -1,4 +1,4 @@
-import { Usuario } from "./usuarioMODEL.js";
+import { Usuario } from "../models/usuarioMODEL.js";
 
 export async function crearUsuario(req, res) {
   const {
@@ -11,7 +11,7 @@ export async function crearUsuario(req, res) {
     tipo_dni,
     tipo_id,
     foto_perfil,
-    fecha_nacimiento
+    fecha_nacimiento,
   } = req.body;
 
   return await Usuario.create({
@@ -24,7 +24,7 @@ export async function crearUsuario(req, res) {
     tipo_dni,
     tipo_id,
     foto_perfil,
-    fecha_nacimiento
+    fecha_nacimiento,
   })
     .then((usuario) => {
       res.status(201).json(usuario);
@@ -33,4 +33,3 @@ export async function crearUsuario(req, res) {
       res.status(500).json(error);
     });
 }
-

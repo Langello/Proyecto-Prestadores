@@ -1,10 +1,9 @@
 import { autenticar } from "./db.js";
 import  express  from "express";
-import { crearUsuario } from "./usuario/crearUsuario.js";
-import { borrarUsuario } from "./usuario/borrarUsuario.js";
-import { obtenerUsuarios , obtenerUsuarioPorId } from "./usuario/getsUsuario.js";
-import { actualizarUsuario } from "./usuario/actualizarUsuario.js";
-
+import { crearUsuario } from "./controller/crearUsuario.js";
+import { borrarUsuario } from "./controller/borrarUsuario.js";
+import { actualizarUsuario } from "./controller/actualizarUsuario.js";
+import { obtenerUsuarios , obtenerUsuarioPorId } from "./controller/getsUsuario.js";
 
 const app = express();
 const port = 3050;
