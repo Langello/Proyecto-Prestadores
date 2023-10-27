@@ -1,4 +1,4 @@
-import { Usuario } from "./usuarioModel.js";
+import { Usuario } from "./usuarioMODEL.js";
 
 export async function obtenerUsuarios(req, res) {
     return await Usuario.findAll().then((usuarios) => {

@@ -1,6 +1,6 @@
-import { Usuario } from "./usuarioModel.js";
+import { Usuario } from "./usuarioMODEL.js";
 
-async function actualizarUsuario(req, res) {
+export async function actualizarUsuario(req, res) {
   const { id } = req.params;
   const {
     nombre,
@@ -30,10 +30,9 @@ async function actualizarUsuario(req, res) {
 
     await usuario.save();
 
-    res.status(200).json({ msg: "Usuario actualizado" });
+    res.status(200).json({ msg: "Usuario actualizado: " + usuario.email  });
   } catch (error) {
     res.status(500).json({ msg: "Error al actualizar el usuario: " + error });
   }
 }
 
-export { actualizarUsuario };

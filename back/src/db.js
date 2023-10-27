@@ -3,10 +3,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const password = process.env.DB_PASSWORD;
+const dbName = process.env.DB_NAME || "prestaciones";
+const host = process.env.DB_HOST || "localhost";
+const dbUser = process.env.DB_USER || "root";
 
 
-const sequelize = new Sequelize("prestaciones", "root", password, {
-  host: "localhost",
+const sequelize = new Sequelize(dbName, dbUser, password, {
+  host: host,
   dialect: "mysql",
 });
 
