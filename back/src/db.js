@@ -3,14 +3,15 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const password = process.env.DB_PASSWORD;
-const dbName = process.env.DB_NAME || "prestaciones";
-const host = process.env.DB_HOST || "localhost";
-const dbUser = process.env.DB_USER || "root";
+const dbName = process.env.DB_NAME 
+const host = process.env.DB_HOST 
+const dbUser = process.env.DB_USER 
+const dbDialect = process.env.DB_DIALECT
 
 
 const sequelize = new Sequelize(dbName, dbUser, password, {
   host: host,
-  dialect: "mysql",
+  dialect: dbDialect,
 });
 
 const autenticar = async () => {
