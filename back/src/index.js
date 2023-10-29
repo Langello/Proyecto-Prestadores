@@ -1,9 +1,10 @@
+import express from "express";
 import { autenticar } from "./db.js";
-import  express  from "express";
-import { crearUsuario } from "./controller/crearUsuario.js";
-import { borrarUsuario } from "./controller/borrarUsuario.js";
-import { actualizarUsuario } from "./controller/actualizarUsuario.js";
-import { obtenerUsuarios , obtenerUsuarioPorId } from "./controller/getsUsuario.js";
+import { crearUsuario } from "./controllers/crearUsuario.js";
+import { borrarUsuario } from "./controllers/borrarUsuario.js";
+import { actualizarUsuario } from "./controllers/actualizarUsuario.js";
+import { obtenerUsuarios, obtenerUsuarioPorId } from "./controllers/getsUsuario.js";
+import { validarContrasena, validarEmailRepetido, validarFormatoEmail, validarDniRepetido, validarFechaNacimiento } from "./controllers/validaciones.js";
 
 const app = express();
 const port = process.env.PORT || 3050;
@@ -15,11 +16,11 @@ autenticar();
 
 // Rutas para el administrador
 // Crear usuario
-app.post("/nuevo-usuario", crearUsuario);
+app.post("/nuevo-usuario", validarEmailRepetido, validarFormatoEmail, validarDniRepetido, validarContrasena, validarFechaNacimiento, crearUsuario);
 // Borrar usuario
 app.delete("/borrar-usuario/:id", borrarUsuario);
 // Actualizar usuario
-app.put("/actualizar-usuario/:id", actualizarUsuario);
+app.put("/actualizar-usuario/:id", validarContrasena, validarFechaNacimiento, validarDniRepetido, actualizarUsuario);
 // Listar usuarios
 app.get("/listar-usuarios", obtenerUsuarios);
 // Obtener usuario por ID
