@@ -1,5 +1,6 @@
 import validator from 'validator';
 import { Usuario } from "../models/usuarioMODEL.js";
+import { Prestador } from "../models/prestadorMODEL.js";
 
 export async function validarContrasena(req, res, next) {
     try {
@@ -72,6 +73,41 @@ export async function validarFechaNacimiento(req, res, next) {
         return validator.isISO8601(fecha_nacimiento)
             ? next()
             : res.status(400).json({ msg: 'Fecha de nacimiento no válida formato: YYYY-MM-DD' });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export async function validarCuilCuitRepetido(req, res, next) {
+    try {
+        const { cuil_cuit } = req.body;
+        return await Prestador.findOne({ where: { cuil_cuit } })
+            .then((prestador) => {
+                return prestador
+                    ? res.status(400).json({ msg: 'CUIT ya registrado' })
+                    : next();
+            })
+            .catch((error) => {
+                res.status(500).json(error);
+            });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export async function validarIdUsuarioRepetido(req, res, next) {
+    try {
+        const usuario_Id = req.params.idUsuario;
+        return await Prestador.findOne({ where: { usuario_Id } })
+            .then((prestador) => {
+                return prestador
+                    ? res.status(400).json({ msg: 'ID de usuario ya registrado' })
+                    : next();
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json(error);
+            });
     } catch (error) {
         res.status(500).json(error);
     }

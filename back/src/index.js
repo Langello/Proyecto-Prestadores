@@ -4,8 +4,10 @@ import { crearUsuario } from "./controllers/crearUsuario.js";
 import { borrarUsuario } from "./controllers/borrarUsuario.js";
 import { actualizarUsuario } from "./controllers/actualizarUsuario.js";
 import { obtenerUsuarios, obtenerUsuarioPorId } from "./controllers/getsUsuario.js";
-import { validarContrasena, validarEmailRepetido, validarFormatoEmail, validarDniRepetido, validarFechaNacimiento } from "./controllers/validaciones.js";
-
+import { validarContrasena, validarEmailRepetido, validarFormatoEmail, validarDniRepetido, validarFechaNacimiento, validarCuilCuitRepetido ,validarIdUsuarioRepetido} from "./controllers/validaciones.js";
+import { crearPrestador } from "./controllers/crearPrestador.js";
+import { actualizarPrestador } from "./controllers/actualizarPrestador.js";
+import { obtenerPrestadores, obtenerPrestadorPorId } from "./controllers/getsPrestador.js";
 const app = express();
 const port = process.env.PORT || 3050;
 
@@ -14,7 +16,7 @@ app.use(express.urlencoded({ extended: false })); // Configuramos el middleware 
 
 autenticar();
 
-// Rutas para el administrador
+// Rutas para administrar usuarios
 // Crear usuario
 app.post("/nuevo-usuario", validarEmailRepetido, validarFormatoEmail, validarDniRepetido, validarContrasena, validarFechaNacimiento, crearUsuario);
 // Borrar usuario
@@ -25,6 +27,19 @@ app.put("/actualizar-usuario/:id", validarContrasena, validarFechaNacimiento, va
 app.get("/listar-usuarios", obtenerUsuarios);
 // Obtener usuario por ID
 app.get("/obtener-usuario/:id", obtenerUsuarioPorId);
+
+// Rutas para prestadores
+// Crear prestador
+app.post("/nuevo-prestador/:idUsuario", validarIdUsuarioRepetido,validarCuilCuitRepetido, crearPrestador);
+// Actualizar prestador
+app.put("/actualizar-prestador/:idPrestador", validarCuilCuitRepetido, actualizarPrestador);
+// Obtener prestadores
+app.get("/listar-prestadores", obtenerPrestadores);
+// Obtener prestador por ID
+app.get("/obtener-prestador/:idPrestador", obtenerPrestadorPorId);
+
+
+
 
 app.listen(port, () => {
     console.log(`Servidor escuchando en el puerto ${port}`);
