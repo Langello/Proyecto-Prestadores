@@ -1,6 +1,7 @@
 import validator from 'validator';
 import { Usuario } from "../models/usuarioMODEL.js";
 import { Prestador } from "../models/prestadorMODEL.js";
+import { Consumidor } from "../models/consumidorMODEL.js";
 
 export async function validarContrasena(req, res, next) {
     try {
@@ -95,10 +96,27 @@ export async function validarCuilCuitRepetido(req, res, next) {
     }
 }
 
-export async function validarIdUsuarioRepetido(req, res, next) {
+export async function validarIdUsuarioRepetidoPrestador(req, res, next) {
     try {
         const usuario_Id = req.params.idUsuario;
         return await Prestador.findOne({ where: { usuario_Id } })
+            .then((prestador) => {
+                return prestador
+                    ? res.status(400).json({ msg: 'ID de usuario ya registrado' })
+                    : next();
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json(error);
+            });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+export async function validarIdUsuarioRepetidoConsumidor(req, res, next) {
+    try {
+        const usuario_Id = req.params.idUsuario;
+        return await Consumidor.findOne({ where: { usuario_Id } })
             .then((prestador) => {
                 return prestador
                     ? res.status(400).json({ msg: 'ID de usuario ya registrado' })
