@@ -35,7 +35,6 @@ const Usuario = sequelize.define('usuario', {
   },
   foto_perfil: DataTypes.STRING
 }, {
-  timestamps: false,
   freezeTableName: true,
 });
 

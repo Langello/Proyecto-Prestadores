@@ -1,12 +1,12 @@
 import { DataTypes } from 'sequelize';
 import {sequelize} from '../db.js'; 
 
-const Clasificacion = sequelize.define('clasificacion', {
-    estrellas : {
-        type: DataTypes.INTEGER,
+const Servicios = sequelize.define('servicios', {
+    nombre : {
+        type: DataTypes.STRING,
         allowNull: false
     },
-    reseña : {
+    descripcion : {
         type: DataTypes.STRING
     }
 } , {
@@ -14,4 +14,4 @@ const Clasificacion = sequelize.define('clasificacion', {
 } 
 )
 
-export { Clasificacion };
+export { Servicios };

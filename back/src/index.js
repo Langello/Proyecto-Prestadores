@@ -8,6 +8,7 @@ import { validarContrasena, validarEmailRepetido, validarFormatoEmail, validarDn
 import { crearPrestador } from "./controllers/crearPrestador.js";
 import { actualizarPrestador } from "./controllers/actualizarPrestador.js";
 import { obtenerPrestadores, obtenerPrestadorPorId } from "./controllers/getsPrestador.js";
+import { obtenerTiposUsuario } from "./controllers/obtenerTiposUsuario.js";
 const app = express();
 const port = process.env.PORT || 3050;
 
@@ -27,6 +28,8 @@ app.put("/actualizar-usuario/:id", validarContrasena, validarFechaNacimiento, va
 app.get("/listar-usuarios", obtenerUsuarios);
 // Obtener usuario por ID
 app.get("/obtener-usuario/:id", obtenerUsuarioPorId);
+// Obteenr tipos de usuario
+app.get("/obtener-tipos-usuario", obtenerTiposUsuario);
 
 // Rutas para prestadores
 // Crear prestador
