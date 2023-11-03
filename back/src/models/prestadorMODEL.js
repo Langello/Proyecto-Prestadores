@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import {sequelize} from '../db.js'; 
+import { Usuario } from './usuarioMODEL.js';
 
 
 const Prestador = sequelize.define('prestadores', {
@@ -28,9 +29,16 @@ const Prestador = sequelize.define('prestadores', {
     },
     usuario_Id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: Usuario,
+            key: 'id',
+        }
     }
-})
+}, 
+)
 
+Usuario.hasOne(Prestador, { foreignKey: 'usuario_Id' });
+Prestador.belongsTo(Usuario, { foreignKey: 'usuario_Id' });
 
 export { Prestador };

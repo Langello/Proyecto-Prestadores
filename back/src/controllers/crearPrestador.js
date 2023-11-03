@@ -1,5 +1,6 @@
 import { Prestador } from "../models/prestadorMODEL.js";
 
+
 export async function crearPrestador(req, res) {
     const idUsuario = req.params.idUsuario;
     const {
@@ -22,6 +23,7 @@ export async function crearPrestador(req, res) {
         usuario_Id: idUsuario
     })
         .then((usuario) => {
+        
             res.status(200).json(usuario);
         })
         .catch((error) => {

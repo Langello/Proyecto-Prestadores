@@ -10,7 +10,7 @@ const Consumidor = sequelize.define('consumidor', {
         type: DataTypes.STRING
     }
 } , {
-    freezeTableName: true
+    freezeTableName: true,
 }
 )
 

@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import {sequelize} from '../db.js';
+import { Tipo } from './tipoMODEL.js';
 
 const Usuario = sequelize.define('usuario', {
   
@@ -28,7 +29,13 @@ const Usuario = sequelize.define('usuario', {
     allowNull: false,
     unique: true
   },
-  tipo_id: DataTypes.INTEGER,
+  tipo_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Tipo,
+      key: 'id',
+    }
+  }, 
   fecha_nacimiento: {
     type: DataTypes.DATEONLY,
     allowNull: false
@@ -37,5 +44,9 @@ const Usuario = sequelize.define('usuario', {
 }, {
   freezeTableName: true,
 });
+
+Tipo.hasOne(Usuario, { foreignKey: 'tipo_id' });
+Usuario.belongsTo(Tipo, { foreignKey: 'tipo_id' });
+
 
 export { Usuario };
