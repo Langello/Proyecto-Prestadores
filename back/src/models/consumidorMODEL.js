@@ -5,7 +5,11 @@ import { Usuario } from './usuarioMODEL.js';
 const Consumidor = sequelize.define('consumidor', {
     usuario_Id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: Usuario,
+            key: 'id',
+        }
     },
     metodo_pago: {
         type: DataTypes.STRING

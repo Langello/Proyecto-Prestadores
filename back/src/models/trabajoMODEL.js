@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import {sequelize} from '../db.js'; 
 import { Prestador } from './prestadorMODEL.js';
 import { Consumidor } from './consumidorMODEL.js';
-import { Usuario } from './usuarioMODEL.js';
+
 
 
 const Trabajo = sequelize.define('trabajos', {
@@ -24,11 +24,19 @@ const Trabajo = sequelize.define('trabajos', {
     },
     prestador_id : {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: Prestador,
+            key: 'id',
+        }
     },
     consumidor_id : {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: Consumidor,
+            key: 'id',
+        }
     },
     tareas : {
         type: DataTypes.STRING
@@ -41,7 +49,11 @@ const Trabajo = sequelize.define('trabajos', {
         type: DataTypes.INTEGER,
         allowNull: true
     }
-})
+}, 
+{
+    freezeTableName: true
+}
+)
 
 Prestador.hasOne(Trabajo, { foreignKey: 'prestador_id' });
 Consumidor.hasOne(Trabajo, { foreignKey: 'consumidor_id' });

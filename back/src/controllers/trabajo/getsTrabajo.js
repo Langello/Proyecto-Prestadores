@@ -18,8 +18,8 @@ export async function obtenerTrabajoPorId(req, res) {
 
     return await Trabajo.findByPk(idTrabajo, {
         include: [Prestador, Consumidor, {
-                model: Prestador,
-                include: [Usuario]
+            model: Prestador,
+            include: [Usuario],
         }, {
                 model: Consumidor,
                 include: [Usuario]
