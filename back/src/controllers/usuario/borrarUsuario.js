@@ -1,4 +1,4 @@
-import { Usuario } from "../models/usuarioMODEL.js";
+import { Usuario } from "../../models/usuarioMODEL.js";
 export async function borrarUsuario(req, res) {
   const { id } = req.params;
 

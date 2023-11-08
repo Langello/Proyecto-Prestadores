@@ -1,4 +1,4 @@
-import { Consumidor } from "../models/consumidorMODEL.js";
+import { Consumidor } from "../../models/consumidorMODEL.js";
 
 export async function crearConsumidor(req, res) {
     const idUsuario = req.params.idUsuario;
@@ -11,7 +11,7 @@ export async function crearConsumidor(req, res) {
         usuario_Id: idUsuario
     })
         .then((usuario) => {
-            res.status(200).json(usuario);
+            res.status(201).json(usuario);
         })
         .catch((error) => {
             res.status(500).json(error);

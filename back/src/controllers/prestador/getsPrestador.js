@@ -1,5 +1,5 @@
-import { Prestador } from "../models/prestadorMODEL.js";
-import { Usuario } from "../models/usuarioMODEL.js";
+import { Prestador } from "../../models/prestadorMODEL.js";
+import { Usuario } from "../../models/usuarioMODEL.js";
 
 export async function obtenerPrestadores(req, res) {
     return await Prestador.findAll()
@@ -21,7 +21,7 @@ export async function obtenerPrestadorPorId(req, res) {
                     msg: "Prestador no encontrado",
                 });
             }
-    
+
             res.status(200).json(prestador);
         })
         .catch((error) => {

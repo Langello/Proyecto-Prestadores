@@ -1,4 +1,4 @@
-import { Prestador } from "../models/prestadorMODEL.js";
+import { Prestador } from "../../models/prestadorMODEL.js";
 
 export async function actualizarPrestador(req, res) {
     const idPrestador = req.params.idPrestador;

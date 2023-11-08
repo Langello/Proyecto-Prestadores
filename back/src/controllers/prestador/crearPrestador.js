@@ -1,4 +1,4 @@
-import { Prestador } from "../models/prestadorMODEL.js";
+import { Prestador } from "../../models/prestadorMODEL.js";
 
 
 export async function crearPrestador(req, res) {
@@ -23,8 +23,8 @@ export async function crearPrestador(req, res) {
         usuario_Id: idUsuario
     })
         .then((usuario) => {
-        
-            res.status(200).json(usuario);
+
+            res.status(201).json(usuario);
         })
         .catch((error) => {
             res.status(500).json(error);

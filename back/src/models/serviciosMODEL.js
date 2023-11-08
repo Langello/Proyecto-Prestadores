@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import {sequelize} from '../db.js'; 
 
-const Servicios = sequelize.define('servicios', {
+const Servicio = sequelize.define('servicios', {
     nombre : {
         type: DataTypes.STRING,
         allowNull: false
@@ -14,4 +14,4 @@ const Servicios = sequelize.define('servicios', {
 } 
 )
 
-export { Servicios };
+export { Servicio };

@@ -1,5 +1,5 @@
-import { Usuario } from "../models/usuarioMODEL.js";
-import { Tipo } from "../models/tipoMODEL.js";
+import { Usuario } from "../../models/usuarioMODEL.js";
+import { Tipo } from "../../models/tipoMODEL.js";
 
 export async function obtenerUsuarios(req, res) {
     return await Usuario.findAll().then((usuarios) => {

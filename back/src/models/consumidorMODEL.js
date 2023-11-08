@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import {sequelize} from '../db.js'; 
+import { Usuario } from './usuarioMODEL.js';
 
 const Consumidor = sequelize.define('consumidor', {
     usuario_Id: {
@@ -13,5 +14,7 @@ const Consumidor = sequelize.define('consumidor', {
     freezeTableName: true,
 }
 )
+Usuario.hasOne(Consumidor, { foreignKey: 'usuario_Id' });
+Consumidor.belongsTo(Usuario, { foreignKey: 'usuario_Id' });
 
 export { Consumidor };

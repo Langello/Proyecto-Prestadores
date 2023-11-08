@@ -1,4 +1,4 @@
-import { Usuario } from "../models/usuarioMODEL.js";
+import { Usuario } from "../../models/usuarioMODEL.js";
 
 export async function actualizarUsuario(req, res) {
   const { id } = req.params;

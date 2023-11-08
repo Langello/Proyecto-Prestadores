@@ -14,4 +14,6 @@ const Clasificacion = sequelize.define('clasificacion', {
 } 
 )
 
+
+
 export { Clasificacion };

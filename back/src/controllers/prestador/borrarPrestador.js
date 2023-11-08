@@ -1,4 +1,4 @@
-import { Prestador } from "../models/prestadorMODEL.js";
+import { Prestador } from "../../models/prestadorMODEL.js";
 export async function borrarPrestador(req, res) {
     const { idPrestador } = req.params;
 

@@ -1,4 +1,4 @@
-import { Usuario } from "../models/usuarioMODEL.js";
+import { Usuario } from "../../models/usuarioMODEL.js";
 
 export async function crearUsuario(req, res) {
   const {
@@ -27,7 +27,7 @@ export async function crearUsuario(req, res) {
     fecha_nacimiento,
   })
     .then((usuario) => {
-      res.status(200).json(usuario);
+      res.status(201).json(usuario);
     })
     .catch((error) => {
       res.status(500).json(error);

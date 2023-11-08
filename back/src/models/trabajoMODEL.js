@@ -1,5 +1,9 @@
 import { DataTypes } from 'sequelize';
 import {sequelize} from '../db.js'; 
+import { Prestador } from './prestadorMODEL.js';
+import { Consumidor } from './consumidorMODEL.js';
+import { Usuario } from './usuarioMODEL.js';
+
 
 const Trabajo = sequelize.define('trabajos', {
     nombre : {
@@ -31,12 +35,19 @@ const Trabajo = sequelize.define('trabajos', {
     },
     estado_id : {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     calificacion_id : {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     }
 })
+
+Prestador.hasOne(Trabajo, { foreignKey: 'prestador_id' });
+Consumidor.hasOne(Trabajo, { foreignKey: 'consumidor_id' });
+Trabajo.belongsTo(Prestador, { foreignKey: 'prestador_id' });
+Trabajo.belongsTo(Consumidor, { foreignKey: 'consumidor_id' });
+
+
 
 export { Trabajo };
