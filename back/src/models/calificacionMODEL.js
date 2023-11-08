@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import {sequelize} from '../db.js'; 
 
-const Clasificacion = sequelize.define('clasificacion', {
+const Calificacion = sequelize.define('calificaciones', {
     estrellas : {
         type: DataTypes.INTEGER,
         allowNull: false
@@ -16,4 +16,4 @@ const Clasificacion = sequelize.define('clasificacion', {
 
 
 
-export { Clasificacion };
+export { Calificacion };

@@ -2,6 +2,8 @@ import { Trabajo } from "../../models/trabajoMODEL.js";
 import { Prestador } from "../../models/prestadorMODEL.js";
 import { Consumidor } from "../../models/consumidorMODEL.js";
 import { Usuario } from "../../models/usuarioMODEL.js";
+import { Estados } from "../../models/estadoMODEL.js";
+import { Calificacion } from "../../models/calificacionMODEL.js";
 
 export async function obtenerTrabajos(req, res) {
     return await Trabajo.findAll()
@@ -23,6 +25,13 @@ export async function obtenerTrabajoPorId(req, res) {
         }, {
                 model: Consumidor,
                 include: [Usuario]
+            }
+            , {
+                model: Estados,
+            },
+            {
+                model: Calificacion,
+                
             }
         ],
 

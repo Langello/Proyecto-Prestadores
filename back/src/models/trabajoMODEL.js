@@ -2,6 +2,8 @@ import { DataTypes } from 'sequelize';
 import {sequelize} from '../db.js'; 
 import { Prestador } from './prestadorMODEL.js';
 import { Consumidor } from './consumidorMODEL.js';
+import { Estados } from './estadoMODEL.js';
+import { Calificacion } from './calificacionMODEL.js';
 
 
 
@@ -43,11 +45,19 @@ const Trabajo = sequelize.define('trabajos', {
     },
     estado_id : {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
+        references: {
+            model: Estados,
+            key: 'id',
+        }
     },
     calificacion_id : {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
+        references: {
+            model: Calificacion,
+            key: 'id',
+        }
     }
 }, 
 {
@@ -57,8 +67,13 @@ const Trabajo = sequelize.define('trabajos', {
 
 Prestador.hasOne(Trabajo, { foreignKey: 'prestador_id' });
 Consumidor.hasOne(Trabajo, { foreignKey: 'consumidor_id' });
+Estados.hasOne(Trabajo, { foreignKey: 'estado_id' });
+Calificacion.hasOne(Trabajo, { foreignKey: 'calificacion_id' });
 Trabajo.belongsTo(Prestador, { foreignKey: 'prestador_id' });
 Trabajo.belongsTo(Consumidor, { foreignKey: 'consumidor_id' });
+Trabajo.belongsTo(Estados, { foreignKey: 'estado_id' });
+Trabajo.belongsTo(Calificacion, { foreignKey: 'calificacion_id' });
+
 
 
 
