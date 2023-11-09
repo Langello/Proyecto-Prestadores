@@ -130,3 +130,20 @@ export async function validarIdUsuarioRepetidoConsumidor(req, res, next) {
         res.status(500).json(error);
     }
 }
+
+export async function validarIdUsuarioExiste(req, res, next) {
+    try {
+        const { idUsuario } = req.params;
+        return await Usuario.findByPk(idUsuario)
+            .then((usuario) => {
+                return usuario
+                    ? next()
+                    : res.status(404).json({ msg: 'Usuario no encontrado' });
+            })
+            .catch((error) => {
+                res.status(500).json(error);
+            });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}

@@ -41,7 +41,8 @@ const Trabajo = sequelize.define('trabajos', {
         }
     },
     tareas : {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
     estado_id : {
         type: DataTypes.INTEGER,
