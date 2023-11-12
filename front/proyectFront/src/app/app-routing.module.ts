@@ -2,20 +2,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { InicioComponent } from './inicio/inicio.component';
-import { BusquedaProfesionalesComponent } from './busqueda-profesionales/busqueda-profesionales.component';
-import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
-import { SolicitudCotizacionesComponent } from './solicitud-cotizaciones/solicitud-cotizaciones.component';
-import { ProgramacionCitasComponent } from './programacion-citas/programacion-citas.component';
-import { GestionResenasComponent } from './gestion-resenas/gestion-resenas.component';
+import { InicioComponent } from './pages/inicio/inicio.component';
+import { BusquedaProfesionalesComponent } from './pages/busqueda-profesionales/busqueda-profesionales.component';
+import { PerfilUsuarioComponent } from './pages/perfil-usuario/perfil-usuario.component';
+import { SolicitudCotizacionesComponent } from './pages/solicitud-cotizaciones/solicitud-cotizaciones.component';
+import { ProgramacionCitasComponent } from './pages/programacion-citas/programacion-citas.component';
+import { GestionResenasComponent } from './pages/gestion-resenas/gestion-resenas.component';
+import { SobreNosotrosComponent } from './pages/sobre-nosotros/sobre-nosotros.component';
+
 
 const routes: Routes = [
-  { path: 'inicio', component: InicioComponent },
+  { path: '', component: InicioComponent },
   { path: 'buscar-profesionales', component: BusquedaProfesionalesComponent },
   { path: 'perfil-usuario/:id', component: PerfilUsuarioComponent },
   { path: 'solicitar-cotizaciones', component: SolicitudCotizacionesComponent },
   { path: 'programar-citas', component: ProgramacionCitasComponent },
   { path: 'gestion-resenas', component: GestionResenasComponent },
+  { path: 'sobre-nosotros', component: SobreNosotrosComponent },
 
   { path: '', redirectTo: '/inicio', pathMatch: 'full' }, // Redirecciona a la página de inicio por defecto.
 ];

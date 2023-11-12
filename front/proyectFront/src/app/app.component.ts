@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'proyectFront';
+  menuOption: string = 'inicio'
+
+  onOption(option: string) {
+    this.menuOption = option
+  }
 }
