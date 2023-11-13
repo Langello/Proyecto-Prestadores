@@ -16,6 +16,7 @@ import { obtenerConsumidorPorId, obtenerConsumidores } from "./controllers/consu
 import { crearTrabajo } from "./controllers/trabajo/crearTrabajo.js";
 import { crearServicio } from "./controllers/servicio/crearServicio.js";
 import { obtenerTrabajos, obtenerTrabajoPorId } from "./controllers/trabajo/getsTrabajo.js";
+import { loginUsuario } from "./controllers/usuario/loginUsuario.js";
 
 
 const app = express();
@@ -66,6 +67,8 @@ app.post("/servicio", crearServicio);
 app.get("/trabajo", obtenerTrabajos);
 // Obtener trabajo por ID
 app.get("/trabajo/:idTrabajo", obtenerTrabajoPorId);
+// Login usuario
+app.post("/login", loginUsuario);
 
 
 
