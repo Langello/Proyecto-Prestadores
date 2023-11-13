@@ -9,7 +9,6 @@ export async function crearUsuario(req, res) {
     dni,
     telefono,
     tipo_dni,
-    tipo_id,
     foto_perfil,
     fecha_nacimiento,
   } = req.body;
@@ -22,7 +21,6 @@ export async function crearUsuario(req, res) {
     dni,
     telefono,
     tipo_dni,
-    tipo_id,
     foto_perfil,
     fecha_nacimiento,
   })

@@ -6,6 +6,9 @@ const Tipo = sequelize.define('tipos', {
         type: DataTypes.STRING,
         allowNull: false
     }
+},
+{
+    timestamps: false
 })
 
 export { Tipo };

@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
-import {sequelize} from '../db.js';
+import { sequelize } from '../db.js';
 import { Tipo } from './tipoMODEL.js';
 
 const Usuario = sequelize.define('usuario', {
-  
+
   nombre: {
     type: DataTypes.STRING,
     allowNull: false
@@ -19,11 +19,14 @@ const Usuario = sequelize.define('usuario', {
   },
   password: DataTypes.STRING,
   dni: {
-  type: DataTypes.STRING,
-  allowNull: false,
-  unique: true
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
   },
-  telefono: DataTypes.STRING,
+  telefono: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   tipo_dni: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -34,8 +37,9 @@ const Usuario = sequelize.define('usuario', {
     references: {
       model: Tipo,
       key: 'id',
-    }
-  }, 
+    },
+    defaultValue: "4"
+  },
   fecha_nacimiento: {
     type: DataTypes.DATEONLY,
     allowNull: false
