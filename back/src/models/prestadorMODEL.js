@@ -4,32 +4,38 @@ import { Usuario } from './usuarioMODEL.js';
 
 
 const Prestador = sequelize.define('prestadores', {
-    cuil_cuit: {
+    cuilCuit: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'cuil_cuit'
     },
     descripcion: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    fotos_trabajos_realizados: {
+    fotosTrabajosRealizados: {
         type: DataTypes.STRING,
+        field: 'fotos_trabajos_realizados'
     },
-    horarios_atencion: {
+    horariosAtencion: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'horarios_atencion'
     },
     disponibilidad: {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    radio_cobertura: {
+    radioCobertura: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'radio_cobertura'
     },
-    usuario_Id: {
+
+    usuarioId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'usuario_id',
         references: {
             model: Usuario,
             key: 'id',
@@ -37,11 +43,16 @@ const Prestador = sequelize.define('prestadores', {
     }
 },
 {
-    freezeTableName: true
+    freezeTableName: true,
+    defaultScope: {
+        attributes: {
+            exclude: [ 'createdAt', 'updatedAt', 'usuarioId' ]
+        }
+    }
 }
 )
 
-Usuario.hasOne(Prestador, { foreignKey: 'usuario_Id' });
-Prestador.belongsTo(Usuario, { foreignKey: 'usuario_Id' });
+Usuario.hasOne(Prestador, { foreignKey: 'usuarioId' });
+Prestador.belongsTo(Usuario, { foreignKey: 'usuarioId' });
 
 export { Prestador };

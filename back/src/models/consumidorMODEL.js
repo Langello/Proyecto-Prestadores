@@ -3,22 +3,29 @@ import {sequelize} from '../db.js';
 import { Usuario } from './usuarioMODEL.js';
 
 const Consumidor = sequelize.define('consumidor', {
-    usuario_Id: {
+    usuarioId : {
         type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'usuario_id',
         references: {
             model: Usuario,
             key: 'id',
         }
     },
-    metodo_pago: {
-        type: DataTypes.STRING
+    metodoPago: {
+        type: DataTypes.STRING,
+        field: 'metodo_pago',
     }
 } , {
     freezeTableName: true,
+    defaultScope: {
+        attributes: {
+            exclude: ['usuarioId']
+        }
+    }
 }
 )
-Usuario.hasOne(Consumidor, { foreignKey: 'usuario_Id' });
-Consumidor.belongsTo(Usuario, { foreignKey: 'usuario_Id' });
+Usuario.hasOne(Consumidor, { foreignKey: 'usuarioId' });
+Consumidor.belongsTo(Usuario, { foreignKey: 'usuarioId' });
 
 export { Consumidor };

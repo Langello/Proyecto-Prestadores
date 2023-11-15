@@ -20,7 +20,7 @@ export async function obtenerConsumidorPorId(req, res) {
 }
 
 export async function obtenerConsumidores(req, res) {
-    return await Consumidor.findAll()
+    return await Consumidor.findAll({include: [Usuario]})
         .then((consumidores) => {
             res.status(200).json(consumidores);
         })

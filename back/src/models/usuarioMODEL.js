@@ -27,30 +27,41 @@ const Usuario = sequelize.define('usuario', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  tipo_dni: {
+  tipoDni: {
     type: DataTypes.STRING,
+    field: 'tipo_dni',
     allowNull: false,
     unique: true
   },
-  tipo_id: {
+  tipoId: {
     type: DataTypes.INTEGER,
     references: {
       model: Tipo,
       key: 'id',
     },
+    field: 'tipo_id',
     defaultValue: "4"
   },
-  fecha_nacimiento: {
+  fechaNacimiento: {
     type: DataTypes.DATEONLY,
+    field: 'fecha_nacimiento',
     allowNull: false
   },
-  foto_perfil: DataTypes.STRING
+  fotoPerfil: {
+    type: DataTypes.STRING,
+    field: 'foto_perfil'
+  },
 }, {
   freezeTableName: true,
+  defaultScope: {
+    attributes: {
+      exclude: [ 'createdAt', 'updatedAt', 'password' ]
+    }
+  }
 });
 
-Tipo.hasOne(Usuario, { foreignKey: 'tipo_id' });
-Usuario.belongsTo(Tipo, { foreignKey: 'tipo_id' });
+Tipo.hasOne(Usuario, { foreignKey: 'tipoId' });
+Usuario.belongsTo(Tipo, { foreignKey: 'tipoId' });
 
 
 export { Usuario };

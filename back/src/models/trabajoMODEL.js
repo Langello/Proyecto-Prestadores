@@ -20,21 +20,24 @@ const Trabajo = sequelize.define('trabajos', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    rango_horario : {
+    rangoHorario : {
         type: DataTypes.STRING,
+        field: 'rango_horario',
         allowNull: false
     },
-    prestador_id : {
+    prestadorId : {
         type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'prestador_id',
         references: {
             model: Prestador,
             key: 'id',
         }
     },
-    consumidor_id : {
+    consumidorId : {
         type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'consumidor_id',
         references: {
             model: Consumidor,
             key: 'id',
@@ -44,17 +47,19 @@ const Trabajo = sequelize.define('trabajos', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    estado_id : {
+    estadoId : {
         type: DataTypes.INTEGER,
         allowNull: true,
+        field: 'estado_id',
         references: {
             model: Estados,
             key: 'id',
         }
     },
-    calificacion_id : {
+    calificacionId : {
         type: DataTypes.INTEGER,
         allowNull: true,
+        field: 'calificacion_id',
         references: {
             model: Calificacion,
             key: 'id',
@@ -66,14 +71,14 @@ const Trabajo = sequelize.define('trabajos', {
 }
 )
 
-Prestador.hasOne(Trabajo, { foreignKey: 'prestador_id' });
-Consumidor.hasOne(Trabajo, { foreignKey: 'consumidor_id' });
-Estados.hasOne(Trabajo, { foreignKey: 'estado_id' });
-Calificacion.hasOne(Trabajo, { foreignKey: 'calificacion_id' });
-Trabajo.belongsTo(Prestador, { foreignKey: 'prestador_id' });
-Trabajo.belongsTo(Consumidor, { foreignKey: 'consumidor_id' });
-Trabajo.belongsTo(Estados, { foreignKey: 'estado_id' });
-Trabajo.belongsTo(Calificacion, { foreignKey: 'calificacion_id' });
+Prestador.hasOne(Trabajo, { foreignKey: 'prestadorId' });
+Consumidor.hasOne(Trabajo, { foreignKey: 'consumidorId' });
+Estados.hasOne(Trabajo, { foreignKey: 'estadoId' });
+Calificacion.hasOne(Trabajo, { foreignKey: 'calificacionId' });
+Trabajo.belongsTo(Prestador, { foreignKey: 'prestadorId' });
+Trabajo.belongsTo(Consumidor, { foreignKey: 'consumidorId' });
+Trabajo.belongsTo(Estados, { foreignKey: 'estadoId' });
+Trabajo.belongsTo(Calificacion, { foreignKey: 'calificacionId' });
 
 
 
