@@ -69,9 +69,9 @@ export async function validarDniRepetido(req, res, next) {
 
 export async function validarFechaNacimiento(req, res, next) {
     try {
-        const { fecha_nacimiento } = req.body;
+        const { fechaNacimiento } = req.body;
 
-        return validator.isISO8601(fecha_nacimiento)
+        return validator.isISO8601(fechaNacimiento)
             ? next()
             : res.status(400).json({ msg: 'Fecha de nacimiento no válida formato: YYYY-MM-DD' });
     } catch (error) {
@@ -81,8 +81,8 @@ export async function validarFechaNacimiento(req, res, next) {
 
 export async function validarCuilCuitRepetido(req, res, next) {
     try {
-        const { cuil_cuit } = req.body;
-        return await Prestador.findOne({ where: { cuil_cuit } })
+        const { cuilCuit } = req.body;
+        return await Prestador.findOne({ where: { cuilCuit } })
             .then((prestador) => {
                 return prestador
                     ? res.status(400).json({ msg: 'CUIT ya registrado' })
@@ -98,8 +98,8 @@ export async function validarCuilCuitRepetido(req, res, next) {
 
 export async function validarIdUsuarioRepetidoPrestador(req, res, next) {
     try {
-        const usuario_Id = req.params.idUsuario;
-        return await Prestador.findOne({ where: { usuario_Id } })
+        const usuarioId = req.params.idUsuario;
+        return await Prestador.findOne({ where: { usuarioId } })
             .then((prestador) => {
                 return prestador
                     ? res.status(400).json({ msg: 'ID de usuario ya registrado' })
@@ -115,8 +115,8 @@ export async function validarIdUsuarioRepetidoPrestador(req, res, next) {
 }
 export async function validarIdUsuarioRepetidoConsumidor(req, res, next) {
     try {
-        const usuario_Id = req.params.idUsuario;
-        return await Consumidor.findOne({ where: { usuario_Id } })
+        const usuarioId = req.params.idUsuario;
+        return await Consumidor.findOne({ where: { usuarioId } })
             .then((prestador) => {
                 return prestador
                     ? res.status(400).json({ msg: 'ID de usuario ya registrado' })

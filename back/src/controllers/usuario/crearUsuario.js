@@ -1,6 +1,7 @@
 import { Usuario } from "../../models/usuarioMODEL.js";
 
 export async function crearUsuario(req, res) {
+  console.log(req.body);
   const {
     nombre,
     apellido,
@@ -8,9 +9,9 @@ export async function crearUsuario(req, res) {
     password,
     dni,
     telefono,
-    tipo_dni,
-    foto_perfil,
-    fecha_nacimiento,
+    tipoDni,
+    fotoPerfil,
+    fechaNacimiento,
   } = req.body;
 
   return await Usuario.create({
@@ -20,9 +21,9 @@ export async function crearUsuario(req, res) {
     password,
     dni,
     telefono,
-    tipo_dni,
-    foto_perfil,
-    fecha_nacimiento,
+    tipoDni,
+    fotoPerfil,
+    fechaNacimiento,
   })
     .then((usuario) => {
       res.status(201).json(usuario);

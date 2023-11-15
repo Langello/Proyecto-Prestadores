@@ -8,9 +8,9 @@ export async function actualizarUsuario(req, res) {
     password,
     dni,
     telefono,
-    tipo_dni,
-    foto_perfil,
-    fecha_nacimiento,
+    tipoDni,
+    fotoPerfil,
+    fechaNacimiento,
   } = req.body;
 
   try {
@@ -24,9 +24,9 @@ export async function actualizarUsuario(req, res) {
     usuario.password = password;
     usuario.dni = dni;
     usuario.telefono = telefono;
-    usuario.tipo_dni = tipo_dni;
-    usuario.fecha_nacimiento = fecha_nacimiento;
-    usuario.foto_perfil = foto_perfil;
+    usuario.tipoDni = tipoDni;
+    usuario.fechaNacimiento = fechaNacimiento;
+    usuario.fotoPerfil = fotoPerfil;
 
     await usuario.save();
 

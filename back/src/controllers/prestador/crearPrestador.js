@@ -4,23 +4,23 @@ import { Prestador } from "../../models/prestadorMODEL.js";
 export async function crearPrestador(req, res) {
     const idUsuario = req.params.idUsuario;
     const {
-        cuil_cuit,
+        cuilCuit,
         descripcion,
-        fotos_trabajos_realizados,
-        horarios_atencion,
+        fotosTrabajosRealizados,
+        horariosAtencion,
         disponibilidad,
-        radio_cobertura,
+        radioCobertura,
 
     } = req.body;
 
     return await Prestador.create({
-        cuil_cuit,
+        cuilCuit,
         descripcion,
-        fotos_trabajos_realizados,
-        horarios_atencion,
+        fotosTrabajosRealizados,
+        horariosAtencion,
         disponibilidad,
-        radio_cobertura,
-        usuario_Id: idUsuario
+        radioCobertura,
+        usuarioId: idUsuario
     })
         .then((usuario) => {
 
