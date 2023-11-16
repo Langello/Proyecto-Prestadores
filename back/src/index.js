@@ -68,7 +68,7 @@ app.get("/trabajo", obtenerTrabajos);
 // Obtener trabajo por ID
 app.get("/trabajo/:idTrabajo", obtenerTrabajoPorId);
 // Login usuario
-app.post("/login", loginUsuario);
+app.post("/login", validarFormatoEmail ,loginUsuario);
 
 
 

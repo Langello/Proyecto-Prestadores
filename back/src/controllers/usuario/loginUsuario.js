@@ -13,7 +13,7 @@ export async function loginUsuario(req, res) {
     
 
 
-    const usuario = await Usuario.findOne({ where: { email } });
+    const usuario = await Usuario.findOne({ where: { email }, attributes: { include: ['password'] } });
 
     if (!usuario) {
         return res.status(404).json({ msg: 'Email no encontrado' });
