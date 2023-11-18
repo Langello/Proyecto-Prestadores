@@ -17,6 +17,7 @@ import { crearTrabajo } from "./controllers/trabajo/crearTrabajo.js";
 import { crearServicio } from "./controllers/servicio/crearServicio.js";
 import { obtenerTrabajos, obtenerTrabajoPorId } from "./controllers/trabajo/getsTrabajo.js";
 import { loginUsuario } from "./controllers/usuario/loginUsuario.js";
+import { enviarMensaje } from "./controllers/consumidor/enviarMensaje.js";
 
 
 const app = express();
@@ -69,6 +70,8 @@ app.get("/trabajo", obtenerTrabajos);
 app.get("/trabajo/:idTrabajo", obtenerTrabajoPorId);
 // Login usuario
 app.post("/login", validarFormatoEmail ,loginUsuario);
+// Mensaje de consumidor a prestador
+app.post("/mensaje", enviarMensaje);
 
 
 
