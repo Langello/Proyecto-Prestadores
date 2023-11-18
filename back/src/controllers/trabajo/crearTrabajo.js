@@ -1,33 +1,38 @@
 import { Trabajo } from "../../models/trabajoMODEL.js";
+import { Estados } from "../../models/estadoMODEL.js";
+import { Calificacion } from "../../models/calificacionMODEL.js";
+
 
 export async function crearTrabajo(req, res) {
   const {
     nombre,
     fecha,
     lugar,
-    rango_horario,
-    prestador_id,
-    consumidor_id,
+    rangoHorario,
+    prestadorId,
+    consumidorId,
     tareas,
-    estado_id,
-    calificacion_id
+    estadoId
   } = req.body;
 
   return await Trabajo.create({
     nombre,
     fecha,
     lugar,
-    rango_horario,
-    prestador_id,
-    consumidor_id,
+    rangoHorario,
+    prestadorId,
+    consumidorId,
     tareas,
-    estado_id,
-    calificacion_id
+    estadoId,
+
+  }, {
+    include: [Estados, Calificacion]
   })
     .then((trabajo) => {
       res.status(201).json(trabajo);
     })
     .catch((error) => {
+      console.log(id);
       res.status(500).json(error);
     });
 }

@@ -1,9 +1,25 @@
 import { Prestador } from "../../models/prestadorMODEL.js";
 import { Usuario } from "../../models/usuarioMODEL.js";
+import { Op, Sequelize } from 'sequelize';
 
 export async function obtenerPrestadores(req, res) {
+    let filtro = req.query.filtro;
+
+    if (!filtro) {
+        filtro = '';
+    }
+
     return await Prestador.findAll({
-        include: [Usuario]
+        include: [Usuario],
+        where: {
+            [Op.or]: [
+                { "$Usuario.nombre$": { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`)} },
+                { horarios_atencion: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`)} },
+                { "$Usuario.apellido$": { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`)}},
+                { "$Usuario.email$": { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`)} },
+                { descripcion: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`)} },
+            ]
+        }
     })
         .then((prestadores) => {
             res.status(200).json(prestadores);
