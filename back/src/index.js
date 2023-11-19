@@ -5,7 +5,7 @@ import { crearUsuario } from "./controllers/usuario/crearUsuario.js";
 import { borrarUsuario } from "./controllers/usuario/borrarUsuario.js";
 import { actualizarUsuario } from "./controllers/usuario/actualizarUsuario.js";
 import { obtenerUsuarios, obtenerUsuarioPorId } from "./controllers/usuario/getsUsuario.js";
-import { validarIdUsuarioExiste, validarContrasena, validarEmailRepetido, validarFormatoEmail, validarDniRepetido, validarFechaNacimiento, validarCuilCuitRepetido, validarIdUsuarioRepetidoPrestador, validarIdUsuarioRepetidoConsumidor } from "./controllers/validaciones.js";
+import { validarToken, validarIdUsuarioExiste, validarContrasena, validarEmailRepetido, validarFormatoEmail, validarDniRepetido, validarFechaNacimiento, validarCuilCuitRepetido, validarIdUsuarioRepetidoPrestador, validarIdUsuarioRepetidoConsumidor } from "./controllers/validaciones.js";
 import { crearPrestador } from "./controllers/prestador/crearPrestador.js";
 import { actualizarPrestador } from "./controllers/prestador/actualizarPrestador.js";
 import { obtenerPrestadores, obtenerPrestadorPorId } from "./controllers/prestador/getsPrestador.js";
@@ -17,7 +17,7 @@ import { crearTrabajo } from "./controllers/trabajo/crearTrabajo.js";
 import { crearServicio } from "./controllers/servicio/crearServicio.js";
 import { obtenerTrabajos, obtenerTrabajoPorId } from "./controllers/trabajo/getsTrabajo.js";
 import { loginUsuario } from "./controllers/usuario/loginUsuario.js";
-import { enviarMensaje } from "./controllers/consumidor/enviarMensaje.js";
+import { enviarMensajeAConsumidor, enviarMensajeAPrestador } from "./controllers/consumidor/enviarMensaje.js";
 
 
 const app = express();
@@ -69,9 +69,11 @@ app.get("/trabajo", obtenerTrabajos);
 // Obtener trabajo por ID
 app.get("/trabajo/:idTrabajo", obtenerTrabajoPorId);
 // Login usuario
-app.post("/login", validarFormatoEmail ,loginUsuario);
+app.post("/login", validarFormatoEmail, loginUsuario);
 // Mensaje de consumidor a prestador
-app.post("/mensaje", enviarMensaje);
+app.post("/mensaje-a-prestador", validarToken, enviarMensajeAPrestador);
+// Mensaje de prestador a consumidor
+app.post("/mensaje-a-consumidor", validarToken, enviarMensajeAConsumidor);
 
 
 

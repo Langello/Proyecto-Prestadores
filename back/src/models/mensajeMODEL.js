@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import {sequelize} from '../db.js'; 
 
-const Mensaje = sequelize.define('mensajes', {
+const MensajeAPrestador = sequelize.define('mensajes_a_prestadores', {
     asunto : {
         type: DataTypes.STRING,
         allowNull: false,
@@ -25,4 +25,27 @@ const Mensaje = sequelize.define('mensajes', {
 } 
 )
 
-export { Mensaje };
+
+const MensajeAConsumidor = sequelize.define('mensajes_a_consumidores', {
+    asunto : {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    mensaje : {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    idOrigen : {
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: 'id_origen'
+    },
+    idDestino : {
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: 'id_destino'
+    }
+})
+
+
+export { MensajeAPrestador, MensajeAConsumidor };

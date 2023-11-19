@@ -3,6 +3,7 @@ import { Usuario } from "../models/usuarioMODEL.js";
 import { Prestador } from "../models/prestadorMODEL.js";
 import { Consumidor } from "../models/consumidorMODEL.js";
 
+
 export async function validarContrasena(req, res, next) {
     try {
         const { password } = req.body;
@@ -144,6 +145,19 @@ export async function validarIdUsuarioExiste(req, res, next) {
                 res.status(500).json(error);
             });
     } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export async function validarToken(req, res, next) {
+    try {
+        const { token } = req.body;
+
+        return validator.isJWT(token)
+            ? next()
+            : res.status(400).json({ msg: 'Por favor inicie sesión' });
+    } catch (error) {
+        console.log(error);
         res.status(500).json(error);
     }
 }
