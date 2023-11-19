@@ -30,9 +30,43 @@ export async function loginUsuario(req, res) {
     const prestador = await Prestador.findOne({ where: { usuarioId: usuario.id } });
 
     
-    const token = jwt.sign({ id: usuario.id, idConsumidor: consumidor?.id, idPrestador: prestador?.id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ idUsuario: usuario.id, idConsumidor: consumidor?.id, idPrestador: prestador?.id }, process.env.JWT_SECRET, {
 
     })
 
     return res.status(200).json({ token });
 }
+
+export async function getRoles(req, res, next) {
+    const { token } = req.body;
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const idUsuario = decoded.idUsuario
+
+    const idConsumidor = decoded.idConsumidor
+
+    const idPrestador = decoded.idPrestador
+    
+    let usuario = false
+    let consumidor = false
+    let prestador = false
+    
+
+    if (idUsuario !== null) {
+        usuario = true
+    }
+
+    if (idConsumidor !== null) {
+        consumidor = true
+    }
+
+    if (idPrestador !== null) {
+        prestador = true
+    }
+
+    return res.status(200).json({usuario, consumidor, prestador});
+
+    
+}
+

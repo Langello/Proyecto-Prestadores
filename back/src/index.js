@@ -16,7 +16,7 @@ import { obtenerConsumidorPorId, obtenerConsumidores } from "./controllers/consu
 import { crearTrabajo } from "./controllers/trabajo/crearTrabajo.js";
 import { crearServicio } from "./controllers/servicio/crearServicio.js";
 import { obtenerTrabajos, obtenerTrabajoPorId } from "./controllers/trabajo/getsTrabajo.js";
-import { loginUsuario } from "./controllers/usuario/loginUsuario.js";
+import { loginUsuario, getRoles } from "./controllers/usuario/loginUsuario.js";
 import { enviarMensajeAConsumidor, enviarMensajeAPrestador } from "./controllers/consumidor/enviarMensaje.js";
 
 
@@ -74,6 +74,8 @@ app.post("/login", validarFormatoEmail, loginUsuario);
 app.post("/mensaje-a-prestador", validarToken, enviarMensajeAPrestador);
 // Mensaje de prestador a consumidor
 app.post("/mensaje-a-consumidor", validarToken, enviarMensajeAConsumidor);
+// Obtener roles para dar permisos
+app.post("/roles", validarToken, getRoles);
 
 
 
