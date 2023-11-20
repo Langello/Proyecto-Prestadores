@@ -1,12 +1,30 @@
 import { Trabajo } from "../../models/trabajoMODEL.js";
-import { Prestador } from "../../models/prestadorMODEL.js";
-import { Consumidor } from "../../models/consumidorMODEL.js";
-import { Usuario } from "../../models/usuarioMODEL.js";
 import { Estados } from "../../models/estadoMODEL.js";
-import { Calificacion } from "../../models/calificacionMODEL.js";
+import { Sequelize } from "sequelize";
+import { Op } from "sequelize";
+
 
 export async function obtenerTrabajos(req, res) {
-    return await Trabajo.findAll()
+    let filtro = req.query.filtro;
+    console.log(filtro);
+
+    if (!filtro) {
+        filtro = '';
+    }
+    return await Trabajo.findAll({
+        include: [Estados],
+        where: {
+            [Op.or]: [
+                { nombre: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
+                { tareas: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
+                { lugar: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
+                { rangoHorario: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } }
+            ],
+            [Op.and]: [
+                { "$Estado.id$": 6 }, // Publicado
+            ]
+        }
+    })
         .then((trabajos) => {
             res.status(200).json(trabajos);
         })
@@ -14,26 +32,13 @@ export async function obtenerTrabajos(req, res) {
             res.status(500).json(error);
         });
 }
-
 export async function obtenerTrabajoPorId(req, res) {
     const { idTrabajo } = req.params;
 
     return await Trabajo.findByPk(idTrabajo, {
-        include: [Prestador, Consumidor, {
-            model: Prestador,
-            include: [Usuario],
-        }, {
-                model: Consumidor,
-                include: [Usuario]
-            }
-            , {
-                model: Estados,
-            },
-            {
-                model: Calificacion,
-                
-            }
-        ],
+
+        include: [Estados],
+
 
     })
         .then((trabajo) => {

@@ -41,13 +41,15 @@ export async function enviarMensajeAConsumidor(req, res) {
         mensaje,
         idOrigen,
         idDestino
-    }),
-    res.status(200).json({
-        msg: 'Mensaje enviado'
     })
-    .catch((error) => {
-        res.status(500).json(error);
-    })
+        .then(() => {
+            res.status(200).json({
+                msg: 'Mensaje enviado'
+            })
+        })
+        .catch((error) => {
+            res.status(500).json(error);
+        })
 }
 
 

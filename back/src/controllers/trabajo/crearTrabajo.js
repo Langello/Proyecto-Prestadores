@@ -1,6 +1,5 @@
 import { Trabajo } from "../../models/trabajoMODEL.js";
 import { Estados } from "../../models/estadoMODEL.js";
-import { Calificacion } from "../../models/calificacionMODEL.js";
 
 
 export async function crearTrabajo(req, res) {
@@ -12,7 +11,6 @@ export async function crearTrabajo(req, res) {
     prestadorId,
     consumidorId,
     tareas,
-    estadoId
   } = req.body;
 
   return await Trabajo.create({
@@ -23,10 +21,10 @@ export async function crearTrabajo(req, res) {
     prestadorId,
     consumidorId,
     tareas,
-    estadoId,
+    estadoId: 6,
 
   }, {
-    include: [Estados, Calificacion]
+    include: [Estados]
   })
     .then((trabajo) => {
       res.status(201).json(trabajo);

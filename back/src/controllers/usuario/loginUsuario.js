@@ -9,7 +9,6 @@ dotenv.config();
 
 
 export async function loginUsuario(req, res) {
-    console.log(req.body)
 
     const email = req.body.email;
     const password = req.body.password;

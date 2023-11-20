@@ -17,7 +17,7 @@ import { crearTrabajo } from "./controllers/trabajo/crearTrabajo.js";
 import { crearServicio } from "./controllers/servicio/crearServicio.js";
 import { obtenerTrabajos, obtenerTrabajoPorId } from "./controllers/trabajo/getsTrabajo.js";
 import { loginUsuario, getRoles } from "./controllers/usuario/loginUsuario.js";
-import { enviarMensajeAConsumidor, enviarMensajeAPrestador } from "./controllers/consumidor/enviarMensaje.js";
+import { enviarMensajeAConsumidor, enviarMensajeAPrestador } from "./controllers/usuario/enviarMensaje.js";
 
 
 const app = express();
