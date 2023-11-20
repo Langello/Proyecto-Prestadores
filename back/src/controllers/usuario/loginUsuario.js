@@ -50,17 +50,16 @@ export async function getRoles(req, res, next) {
     let usuario = false
     let consumidor = false
     let prestador = false
-    
 
-    if (idUsuario !== null) {
+    if (idUsuario !== undefined) {
         usuario = true
     }
 
-    if (idConsumidor !== null) {
+    if (idConsumidor !== undefined) {
         consumidor = true
     }
 
-    if (idPrestador !== null) {
+    if (idPrestador !== undefined) {
         prestador = true
     }
 

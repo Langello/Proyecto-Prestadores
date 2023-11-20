@@ -2,6 +2,10 @@ import validator from 'validator';
 import { Usuario } from "../models/usuarioMODEL.js";
 import { Prestador } from "../models/prestadorMODEL.js";
 import { Consumidor } from "../models/consumidorMODEL.js";
+import  Jwt  from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 
 export async function validarContrasena(req, res, next) {
@@ -99,11 +103,17 @@ export async function validarCuilCuitRepetido(req, res, next) {
 
 export async function validarIdUsuarioRepetidoPrestador(req, res, next) {
     try {
-        const usuarioId = req.params.idUsuario;
+
+        const { token } = req.body
+
+        const decoded = Jwt.verify(token, process.env.JWT_SECRET);
+
+        const usuarioId = decoded.idUsuario
+
         return await Prestador.findOne({ where: { usuarioId } })
             .then((prestador) => {
                 return prestador
-                    ? res.status(400).json({ msg: 'ID de usuario ya registrado' })
+                    ? res.status(400).json({ msg: 'Ya tienes una cuenta como prestador' })
                     : next();
             })
             .catch((error) => {
@@ -116,11 +126,17 @@ export async function validarIdUsuarioRepetidoPrestador(req, res, next) {
 }
 export async function validarIdUsuarioRepetidoConsumidor(req, res, next) {
     try {
-        const usuarioId = req.params.idUsuario;
+        
+        const { token } = req.body
+
+        const decoded = Jwt.verify(token, process.env.JWT_SECRET);
+
+        const usuarioId = decoded.idUsuario
+
         return await Consumidor.findOne({ where: { usuarioId } })
             .then((prestador) => {
                 return prestador
-                    ? res.status(400).json({ msg: 'ID de usuario ya registrado' })
+                    ? res.status(400).json({ msg: 'Ya tienes una cuenta como consumidor' })
                     : next();
             })
             .catch((error) => {
@@ -134,12 +150,17 @@ export async function validarIdUsuarioRepetidoConsumidor(req, res, next) {
 
 export async function validarIdUsuarioExiste(req, res, next) {
     try {
-        const { idUsuario } = req.params;
+        const { token } = req.body;
+
+        const decoded = Jwt.verify(token, process.env.JWT_SECRET);
+
+        const idUsuario = decoded.idUsuario
+
         return await Usuario.findByPk(idUsuario)
             .then((usuario) => {
                 return usuario
                     ? next()
-                    : res.status(404).json({ msg: 'Usuario no encontrado' });
+                    : res.status(404).json({ msg: 'Usuario inexistente' });
             })
             .catch((error) => {
                 res.status(500).json(error);
@@ -162,3 +183,15 @@ export async function validarToken(req, res, next) {
     }
 }
 
+export async function validarDisponibilidad(req, res, next) {
+    try {
+        const { disponibilidad } = req.body;
+    
+        return disponibilidad
+            ? next()    
+            : res.status(400).json({ msg: 'Por favor ingrese disponibilidad' });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}

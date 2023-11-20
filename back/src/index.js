@@ -5,7 +5,7 @@ import { crearUsuario } from "./controllers/usuario/crearUsuario.js";
 import { borrarUsuario } from "./controllers/usuario/borrarUsuario.js";
 import { actualizarUsuario } from "./controllers/usuario/actualizarUsuario.js";
 import { obtenerUsuarios, obtenerUsuarioPorId } from "./controllers/usuario/getsUsuario.js";
-import { validarToken, validarIdUsuarioExiste, validarContrasena, validarEmailRepetido, validarFormatoEmail, validarDniRepetido, validarFechaNacimiento, validarCuilCuitRepetido, validarIdUsuarioRepetidoPrestador, validarIdUsuarioRepetidoConsumidor } from "./controllers/validaciones.js";
+import { validarToken, validarDisponibilidad, validarIdUsuarioExiste, validarContrasena, validarEmailRepetido, validarFormatoEmail, validarDniRepetido, validarFechaNacimiento, validarCuilCuitRepetido, validarIdUsuarioRepetidoPrestador, validarIdUsuarioRepetidoConsumidor } from "./controllers/validaciones.js";
 import { crearPrestador } from "./controllers/prestador/crearPrestador.js";
 import { actualizarPrestador } from "./controllers/prestador/actualizarPrestador.js";
 import { obtenerPrestadores, obtenerPrestadorPorId } from "./controllers/prestador/getsPrestador.js";
@@ -41,11 +41,11 @@ app.put("/usuario/:id", validarContrasena, validarFechaNacimiento, validarDniRep
 // Listar usuarios
 app.get("/usuario", obtenerUsuarios);
 // Obtener usuario por ID
-app.get("/usuario/:id", obtenerUsuarioPorId);
+app.get("/usuario/:token", obtenerUsuarioPorId);
 // Obtener tipos de usuario
 app.get("/tipos-usuario", obtenerTiposUsuario);
 // Crear prestador
-app.post("/prestador/:idUsuario", validarIdUsuarioExiste, validarIdUsuarioRepetidoPrestador, validarCuilCuitRepetido, crearPrestador);
+app.post("/prestador", validarToken, validarIdUsuarioRepetidoPrestador, validarCuilCuitRepetido, validarDisponibilidad, crearPrestador);
 // Actualizar prestador
 app.put("/prestador/:idPrestador", validarCuilCuitRepetido, actualizarPrestador);
 // Obtener prestadores
@@ -55,7 +55,7 @@ app.get("/prestador/:idPrestador", obtenerPrestadorPorId);
 // Borrar prestador
 app.delete("/prestador/:idPrestador", borrarPrestador);
 // Crear consumidor
-app.post("/consumidor/:idUsuario", validarIdUsuarioExiste, validarIdUsuarioRepetidoConsumidor, crearConsumidor);
+app.post("/consumidor", validarToken, validarIdUsuarioRepetidoConsumidor, crearConsumidor);
 // Obtener consumidor por ID
 app.get("/consumidor/:idConsumidor", obtenerConsumidorPorId);
 // Obtener consumidores

@@ -11,7 +11,7 @@ export async function enviarMensajeAPrestador(req, res) {
 
     if (!idOrigen) {
         return res.status(401).json({
-            msg: 'Token no válido'
+            msg: 'Cuenta no válida'
         })
     }
 
@@ -35,6 +35,12 @@ export async function enviarMensajeAConsumidor(req, res) {
     const { asunto, mensaje, token, idDestino } = req.body;
     const decoded = Jwt.verify(token, process.env.JWT_SECRET);
     const idOrigen = decoded.idPrestador;
+
+    if (!idOrigen) {
+        return res.status(401).json({
+            msg: 'Cuenta no válida'
+        })
+    }
     
     return await MensajeAConsumidor.create({
         asunto,

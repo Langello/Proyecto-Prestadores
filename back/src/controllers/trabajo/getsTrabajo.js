@@ -21,7 +21,7 @@ export async function obtenerTrabajos(req, res) {
                 { rangoHorario: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } }
             ],
             [Op.and]: [
-                { "$Estado.id$": 6 }, // Publicado
+                { "$Estado.id$": 6 }, // El 6 es el id del estado "Publicado"
             ]
         }
     })
