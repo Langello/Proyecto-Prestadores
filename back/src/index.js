@@ -37,7 +37,7 @@ app.post("/usuario", validarEmailRepetido, validarFormatoEmail, validarDniRepeti
 // Borrar usuario
 app.delete("/usuario/:id", borrarUsuario);
 // Actualizar usuario
-app.put("/usuario/:id", validarContrasena, validarFechaNacimiento, validarDniRepetido, actualizarUsuario);
+app.put("/usuario", validarContrasena, validarFechaNacimiento, validarToken, validarIdUsuarioExiste, actualizarUsuario);
 // Listar usuarios
 app.get("/usuario", obtenerUsuarios);
 // Obtener usuario por ID
