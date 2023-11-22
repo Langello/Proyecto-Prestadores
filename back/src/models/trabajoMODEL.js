@@ -27,7 +27,7 @@ const Trabajo = sequelize.define('trabajos', {
     },
     prestadorId : {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         field: 'prestador_id',
         references: {
             model: Prestador,

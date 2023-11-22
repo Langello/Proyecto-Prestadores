@@ -1,24 +1,32 @@
 import { Trabajo } from "../../models/trabajoMODEL.js";
 import { Estados } from "../../models/estadoMODEL.js";
+import Jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 
 export async function crearTrabajo(req, res) {
+
   const {
     nombre,
     fecha,
     lugar,
     rangoHorario,
-    prestadorId,
-    consumidorId,
+    token,
     tareas,
   } = req.body;
+
+  const decoded = Jwt.verify(token, process.env.JWT_SECRET);
+
+  const consumidorId = decoded.idConsumidor;
 
   return await Trabajo.create({
     nombre,
     fecha,
     lugar,
     rangoHorario,
-    prestadorId,
+    prestadorId : null,
     consumidorId,
     tareas,
     estadoId: 6,
@@ -26,11 +34,14 @@ export async function crearTrabajo(req, res) {
   }, {
     include: [Estados]
   })
-    .then((trabajo) => {
-      res.status(201).json(trabajo);
+    .then(() => {
+      res.status(201).json(
+        {
+          msg: "Trabajo publicado",
+        }
+      );
     })
     .catch((error) => {
-      console.log(id);
       res.status(500).json(error);
     });
 }

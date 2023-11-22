@@ -15,10 +15,10 @@ import { crearConsumidor } from "./controllers/consumidor/crearConsumidor.js";
 import { obtenerConsumidorPorId, obtenerConsumidores } from "./controllers/consumidor/getsConsumidor.js";
 import { crearTrabajo } from "./controllers/trabajo/crearTrabajo.js";
 import { crearServicio } from "./controllers/servicio/crearServicio.js";
-import { obtenerTrabajos, obtenerTrabajoPorId } from "./controllers/trabajo/getsTrabajo.js";
+import { obtenerTrabajos, obtenerTrabajoPorId , obtenerTrabajosByConsumidor, obtenerTrabajosByPrestador} from "./controllers/trabajo/getsTrabajo.js";
 import { loginUsuario, getRoles } from "./controllers/usuario/loginUsuario.js";
-import { enviarMensajeAConsumidor, enviarMensajeAPrestador } from "./controllers/usuario/enviarMensaje.js";
-
+import { enviarMensajeAConsumidor, enviarMensajeAPrestador } from "./controllers/mensaje/enviarMensaje.js";
+import { getMensajeConsumidorEnviado, getMensajeConsumidorRecibido, getMensajePrestadorRecibido, getMensajePrestadorEnviado } from "./controllers/mensaje/getMensaje.js";
 
 const app = express();
 const port = process.env.PORT || 3050;
@@ -68,12 +68,26 @@ app.post("/servicio", crearServicio);
 app.get("/trabajo", obtenerTrabajos);
 // Obtener trabajo por ID
 app.get("/trabajo/:idTrabajo", obtenerTrabajoPorId);
+// Obtener trabajos por consumidor
+app.get("/trabajo-consumidor/:token", obtenerTrabajosByConsumidor);
+// Obtener trabajos por prestador
+app.get("/trabajo-prestador/:token", obtenerTrabajosByPrestador);
 // Login usuario
 app.post("/login", validarFormatoEmail, loginUsuario);
 // Mensaje de consumidor a prestador
 app.post("/mensaje-a-prestador", validarToken, enviarMensajeAPrestador);
 // Mensaje de prestador a consumidor
 app.post("/mensaje-a-consumidor", validarToken, enviarMensajeAConsumidor);
+// Obtener mensajes de consumidor enviados
+app.get("/mensaje-consumidor-enviado/:token", getMensajeConsumidorEnviado);
+// Obtener mensajes de consumidor recibidos
+app.get("/mensaje-consumidor-recibido/:token", getMensajeConsumidorRecibido);
+// Obtener mensajes de prestador enviados
+app.get("/mensaje-prestador-enviado/:token", getMensajePrestadorEnviado);
+// Obtener mensajes de prestador recibidos
+app.get("/mensaje-prestador-recibido/:token", getMensajePrestadorRecibido);
+
+
 // Obtener roles para dar permisos
 app.post("/roles", validarToken, getRoles);
 

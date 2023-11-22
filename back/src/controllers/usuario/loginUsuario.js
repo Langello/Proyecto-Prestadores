@@ -36,7 +36,7 @@ export async function loginUsuario(req, res) {
     return res.status(200).json({ token });
 }
 
-export async function getRoles(req, res, next) {
+export async function getRoles(req, res) {
     const { token } = req.body;
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
