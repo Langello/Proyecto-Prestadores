@@ -19,7 +19,7 @@ import { obtenerTrabajos, obtenerTrabajoPorId , obtenerTrabajosByConsumidor, obt
 import { loginUsuario, getRoles } from "./controllers/usuario/loginUsuario.js";
 import { enviarMensajeAConsumidor, enviarMensajeAPrestador } from "./controllers/mensaje/enviarMensaje.js";
 import { getMensajeConsumidorEnviado, getMensajeConsumidorRecibido, getMensajePrestadorRecibido, getMensajePrestadorEnviado } from "./controllers/mensaje/getMensaje.js";
-
+import { esMiTrabajoConsumidor, esMiTrabajoPrestador } from "./controllers/consumidor/esMiTrabajo.js";
 const app = express();
 const port = process.env.PORT || 3050;
 
@@ -86,10 +86,12 @@ app.get("/mensaje-consumidor-recibido/:token", getMensajeConsumidorRecibido);
 app.get("/mensaje-prestador-enviado/:token", getMensajePrestadorEnviado);
 // Obtener mensajes de prestador recibidos
 app.get("/mensaje-prestador-recibido/:token", getMensajePrestadorRecibido);
-
-
 // Obtener roles para dar permisos
 app.post("/roles", validarToken, getRoles);
+// Saber si soy el dueño de ese trabajo como consumidor
+app.post("/es-mi-trabajo-consumidor", esMiTrabajoConsumidor);
+// Saber si soy el dueño de ese trabajo como prestador
+app.post("/es-mi-trabajo-prestador", esMiTrabajoPrestador);
 
 
 

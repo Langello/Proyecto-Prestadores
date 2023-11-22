@@ -106,8 +106,8 @@ export async function getMensajePrestadorRecibido(req, res) {
                     model: Usuario, attributes:
                     {
                         exclude: ['id', 'dni', 'email', 'telefono',
-                            'createdAt', 'updatedAt', 'sexo',
-                            'sexoId', 'password', 'fotoPerfil', 'fechaNacimiento']
+                            'createdAt', 'updatedAt', 'tipoDni', 'tipoId',
+                             'password', 'fotoPerfil', 'fechaNacimiento']
                     }
                 }
             ],
@@ -150,8 +150,8 @@ export async function getMensajePrestadorEnviado(req, res) {
                     model: Usuario, attributes:
                     {
                         exclude: ['id', 'dni', 'email', 'telefono',
-                            'createdAt', 'updatedAt', 'sexo',
-                            'sexoId', 'password', 'fotoPerfil', 'fechaNacimiento']
+                            'createdAt', 'updatedAt', 'tipoDni', 'tipoId',
+                            'sexoId', 'password', 'fotoPerfil', 'fechaNacimiento' ]
                     }
                 }
             ],

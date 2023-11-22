@@ -16,7 +16,13 @@ export async function obtenerTrabajos(req, res) {
         filtro = '';
     }
     return await Trabajo.findAll({
-        include: [Estados],
+        include: [
+            {
+                model: Estados,
+                attributes: {
+                    exclude: [ 'createdAt', 'updatedAt']
+                }
+            }],
         where: {
             [Op.or]: [
                 { nombre: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
@@ -26,6 +32,11 @@ export async function obtenerTrabajos(req, res) {
             ],
             [Op.and]: [
                 { "$Estado.id$": 6 }, // El 6 es el id del estado "Publicado"
+            ]
+        },
+        attributes: {
+            exclude: [
+                'estadoId', 'createdAt', 'updatedAt'
             ]
         }
     })
@@ -46,9 +57,20 @@ export async function obtenerTrabajosByConsumidor(req, res) {
 
     
     return await Trabajo.findAll({
-        include: [Estados],
+        include: [
+            {
+                model: Estados,
+                attributes: {
+                    exclude: [ 'createdAt', 'updatedAt']
+                }
+            }],
         where: {
             consumidorId: id,
+        },
+        attributes: {
+            exclude: [
+            'estadoId', 'createdAt', 'updatedAt'
+            ]
         }
     })
         .then((trabajos) => {
@@ -68,9 +90,21 @@ export async function obtenerTrabajosByPrestador(req, res) {
 
     
     return await Trabajo.findAll({
-        include: [Estados],
+        include: [
+            {
+                model: Estados,
+                attributes: {
+                    exclude: [ 'createdAt', 'updatedAt']
+                }
+            }
+        ],
         where: {
             prestadorId: id,
+        },
+        attributes: {
+            exclude: [
+                'estadoId', 'createdAt', 'updatedAt'
+            ]
         }
     })
         .then((trabajos) => {
@@ -89,7 +123,19 @@ export async function obtenerTrabajoPorId(req, res) {
 
     return await Trabajo.findByPk(idTrabajo, {
 
-        include: [Estados],
+        include: [
+            {
+                model: Estados,
+                attributes: {
+                    exclude: [ 'createdAt', 'updatedAt']
+                }
+            }
+        ],
+        attributes: {
+            exclude: [
+                'estadoId', 'createdAt', 'updatedAt'
+            ]
+        }
 
 
     })
