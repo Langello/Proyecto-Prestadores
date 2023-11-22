@@ -35,6 +35,7 @@ export async function enviarMensajeAConsumidor(req, res) {
     const { asunto, mensaje, token, idDestino } = req.body;
     const decoded = Jwt.verify(token, process.env.JWT_SECRET);
     const idOrigen = decoded.idPrestador;
+    console.log(req.body)
 
     if (!idOrigen) {
         return res.status(401).json({

@@ -80,12 +80,14 @@ const MensajeAConsumidor = sequelize.define('mensajes_a_consumidores', {
 }
 )
 
-Prestador.hasOne(MensajeAConsumidor, { foreignKey: 'idDestino' });
-MensajeAConsumidor.belongsTo(Prestador, { foreignKey: 'idDestino' });
-Consumidor.hasOne(MensajeAPrestador, { foreignKey: 'idDestino' });
-MensajeAPrestador.belongsTo(Consumidor, { foreignKey: 'idDestino' });
-Prestador.hasOne(MensajeAPrestador, { foreignKey: 'idOrigen' });
-MensajeAPrestador.belongsTo(Prestador, { foreignKey: 'idOrigen' });
+Prestador.hasOne(MensajeAConsumidor, { foreignKey: 'idOrigen' });
+MensajeAConsumidor.belongsTo(Prestador, { foreignKey: 'idOrigen' });
+Consumidor.hasOne(MensajeAPrestador, { foreignKey: 'idOrigen' });
+MensajeAPrestador.belongsTo(Consumidor, { foreignKey: 'idOrigen' });
+Consumidor.hasOne(MensajeAConsumidor,{ foreignKey: 'idDestino' })
+MensajeAConsumidor.belongsTo(Consumidor, { foreignKey: 'idDestino' });
+Prestador.hasOne(MensajeAPrestador, { foreignKey: 'idDestino' });
+MensajeAPrestador.belongsTo(Prestador, { foreignKey: 'idDestino' });
 
 
 

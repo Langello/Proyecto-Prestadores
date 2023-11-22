@@ -138,10 +138,11 @@ export async function getMensajePrestadorEnviado(req, res) {
 
     const decoded = Jwt.verify(token, process.env.JWT_SECRET);
     
+    
 
     const id = decoded.idPrestador
 
-    return await MensajeAPrestador.findAll({
+    return await MensajeAConsumidor.findAll({
         include: [{
             model: Consumidor,
             include: [
@@ -161,7 +162,7 @@ export async function getMensajePrestadorEnviado(req, res) {
             }
         }],
         where: {
-            idDestino: id
+            idOrigen: id
         },
     })
 
