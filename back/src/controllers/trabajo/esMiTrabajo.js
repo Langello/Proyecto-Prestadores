@@ -41,7 +41,7 @@ export async function esMiTrabajoPrestador(req, res) {
 
         .then((trabajo) => {
             if (!trabajo) {
-                return res.status(404).json({
+                return res.status(200).json({
                     msg: false,
                 });
             } else {

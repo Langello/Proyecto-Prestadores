@@ -19,7 +19,10 @@ import { obtenerTrabajos, obtenerTrabajoPorId , obtenerTrabajosByConsumidor, obt
 import { loginUsuario, getRoles } from "./controllers/usuario/loginUsuario.js";
 import { enviarMensajeAConsumidor, enviarMensajeAPrestador } from "./controllers/mensaje/enviarMensaje.js";
 import { getMensajeConsumidorEnviado, getMensajeConsumidorRecibido, getMensajePrestadorRecibido, getMensajePrestadorEnviado } from "./controllers/mensaje/getMensaje.js";
-import { esMiTrabajoConsumidor, esMiTrabajoPrestador } from "./controllers/consumidor/esMiTrabajo.js";
+import { esMiTrabajoConsumidor, esMiTrabajoPrestador } from "./controllers/trabajo/esMiTrabajo.js";
+import { patchEstadoTrabajo } from "./controllers/trabajo/patchTrabajoEstado.js";
+import { patchTrabajoPrestadorAsignado } from "./controllers/trabajo/patchTrabajoPrestadorAsignado.js";
+
 const app = express();
 const port = process.env.PORT || 3050;
 
@@ -79,7 +82,7 @@ app.post("/mensaje-a-prestador", validarToken, enviarMensajeAPrestador);
 // Mensaje de prestador a consumidor
 app.post("/mensaje-a-consumidor", validarToken, enviarMensajeAConsumidor);
 // Obtener mensajes de consumidor enviados
-app.get("/mensaje-consumidor-enviado/:token", getMensajeConsumidorEnviado);
+app.get("/mensaje-consumidor-enviado/:token",  getMensajeConsumidorEnviado);
 // Obtener mensajes de consumidor recibidos
 app.get("/mensaje-consumidor-recibido/:token", getMensajeConsumidorRecibido);
 // Obtener mensajes de prestador enviados
@@ -89,9 +92,13 @@ app.get("/mensaje-prestador-recibido/:token", getMensajePrestadorRecibido);
 // Obtener roles para dar permisos
 app.post("/roles", validarToken, getRoles);
 // Saber si soy el dueño de ese trabajo como consumidor
-app.post("/es-mi-trabajo-consumidor", esMiTrabajoConsumidor);
+app.post("/es-mi-trabajo-consumidor",  validarToken ,esMiTrabajoConsumidor);
 // Saber si soy el dueño de ese trabajo como prestador
-app.post("/es-mi-trabajo-prestador", esMiTrabajoPrestador);
+app.post("/es-mi-trabajo-prestador",  validarToken ,esMiTrabajoPrestador);
+// Cambiar estado de trabajo
+app.patch("/trabajo-estado/:idTrabajo", validarToken, patchEstadoTrabajo);
+// Asignar prestador a trabajo
+app.patch("/trabajo-prestador-asignado/:idTrabajo", validarToken, patchTrabajoPrestadorAsignado);
 
 
 
