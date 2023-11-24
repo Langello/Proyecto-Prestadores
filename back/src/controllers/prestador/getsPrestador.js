@@ -1,6 +1,10 @@
 import { Prestador } from "../../models/prestadorMODEL.js";
 import { Usuario } from "../../models/usuarioMODEL.js";
 import { Op, Sequelize } from 'sequelize';
+import Jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export async function obtenerPrestadores(req, res) {
     let filtro = req.query.filtro;
@@ -51,4 +55,33 @@ export async function obtenerPrestadorPorId(req, res) {
             res.status(500).json(error);
         })
 
+}
+
+export async function obtenerPrestadorByToken(req, res) {
+    
+    const { token } = req.params;
+    
+
+    const decoded = Jwt.verify(token, process.env.JWT_SECRET);
+    
+    const idPrestador = decoded.idPrestador;
+
+    return await Prestador.findByPk(
+        idPrestador,
+    )
+        .then((prestador) => {
+            if (!prestador) {
+                return res.status(404).json({
+                    msg: "Prestador no encontrado",
+                });
+            }
+
+            res.status(200).json(prestador.id);
+        })
+        .catch((error) => {
+            console.log(error);
+            res.status(500).json(error);
+        })
+
+    
 }

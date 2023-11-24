@@ -1,4 +1,5 @@
 import { Trabajo } from '../../models/trabajoMODEL.js';
+import { Prestador } from '../../models/prestadorMODEL.js';
 import Jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
@@ -19,8 +20,9 @@ export async function patchTrabajoPrestadorAsignado(req, res) {
         });
     }
 
+    
     try {
-        const prestador = await Trabajo.findOne({ where: { id: prestadorId } });
+        const prestador = await Prestador.findOne({ where: { id: prestadorId } });
 
         if (!prestador) {
             return res.status(404).json({

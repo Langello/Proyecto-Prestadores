@@ -8,7 +8,7 @@ import { obtenerUsuarios, obtenerUsuarioPorId } from "./controllers/usuario/gets
 import { validarToken, validarDisponibilidad, validarIdUsuarioExiste, validarContrasena, validarEmailRepetido, validarFormatoEmail, validarDniRepetido, validarFechaNacimiento, validarCuilCuitRepetido, validarIdUsuarioRepetidoPrestador, validarIdUsuarioRepetidoConsumidor } from "./controllers/validaciones.js";
 import { crearPrestador } from "./controllers/prestador/crearPrestador.js";
 import { actualizarPrestador } from "./controllers/prestador/actualizarPrestador.js";
-import { obtenerPrestadores, obtenerPrestadorPorId } from "./controllers/prestador/getsPrestador.js";
+import { obtenerPrestadores, obtenerPrestadorPorId, obtenerPrestadorByToken } from "./controllers/prestador/getsPrestador.js";
 import { borrarPrestador } from "./controllers/prestador/borrarPrestador.js";
 import { obtenerTiposUsuario } from "./controllers/usuario/obtenerTiposUsuario.js";
 import { crearConsumidor } from "./controllers/consumidor/crearConsumidor.js";
@@ -99,7 +99,8 @@ app.post("/es-mi-trabajo-prestador",  validarToken ,esMiTrabajoPrestador);
 app.patch("/trabajo-estado/:idTrabajo", validarToken, patchEstadoTrabajo);
 // Asignar prestador a trabajo
 app.patch("/trabajo-prestador-asignado/:idTrabajo", validarToken, patchTrabajoPrestadorAsignado);
-
+// Obtener id de prestador por token
+app.get("/prestador-id/:token", obtenerPrestadorByToken);
 
 
 
