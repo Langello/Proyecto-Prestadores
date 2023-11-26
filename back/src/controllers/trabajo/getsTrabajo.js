@@ -1,8 +1,9 @@
 import { Trabajo } from "../../models/trabajoMODEL.js";
 import { Estados } from "../../models/estadoMODEL.js";
+import { Calificacion } from "../../models/calificacionMODEL.js";
 import { Sequelize } from "sequelize";
 import { Op } from "sequelize";
-import  Jwt  from "jsonwebtoken";
+import Jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -10,7 +11,7 @@ dotenv.config();
 
 export async function obtenerTrabajos(req, res) {
     let filtro = req.query.filtro;
-    
+
 
     if (!filtro) {
         filtro = '';
@@ -20,9 +21,10 @@ export async function obtenerTrabajos(req, res) {
             {
                 model: Estados,
                 attributes: {
-                    exclude: [ 'createdAt', 'updatedAt']
+                    exclude: ['createdAt', 'updatedAt']
                 }
-            }],
+            },
+        ],
         where: {
             [Op.or]: [
                 { nombre: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
@@ -55,13 +57,19 @@ export async function obtenerTrabajosByConsumidor(req, res) {
 
     const id = decoded.idConsumidor
 
-    
+
     return await Trabajo.findAll({
         include: [
             {
                 model: Estados,
                 attributes: {
-                    exclude: [ 'createdAt', 'updatedAt']
+                    exclude: ['createdAt', 'updatedAt']
+                },
+            },
+            {
+                model: Calificacion,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
                 }
             }],
         where: {
@@ -69,7 +77,7 @@ export async function obtenerTrabajosByConsumidor(req, res) {
         },
         attributes: {
             exclude: [
-            'estadoId', 'createdAt', 'updatedAt'
+                'estadoId', 'createdAt', 'updatedAt'
             ]
         }
     })
@@ -88,13 +96,19 @@ export async function obtenerTrabajosByPrestador(req, res) {
 
     const id = decoded.idPrestador
 
-    
+
     return await Trabajo.findAll({
         include: [
             {
                 model: Estados,
                 attributes: {
-                    exclude: [ 'createdAt', 'updatedAt']
+                    exclude: ['createdAt', 'updatedAt']
+                }
+            },
+            {
+                model: Calificacion,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
                 }
             }
         ],
@@ -127,7 +141,13 @@ export async function obtenerTrabajoPorId(req, res) {
             {
                 model: Estados,
                 attributes: {
-                    exclude: [ 'createdAt', 'updatedAt']
+                    exclude: ['createdAt', 'updatedAt']
+                }
+            },
+            {
+                model: Calificacion,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
                 }
             }
         ],

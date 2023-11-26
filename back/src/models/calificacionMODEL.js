@@ -6,7 +6,7 @@ const Calificacion = sequelize.define('calificaciones', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    reseña : {
+    comentario : {
         type: DataTypes.STRING
     }
 } , {

@@ -22,6 +22,7 @@ import { getMensajeConsumidorEnviado, getMensajeConsumidorRecibido, getMensajePr
 import { esMiTrabajoConsumidor, esMiTrabajoPrestador } from "./controllers/trabajo/esMiTrabajo.js";
 import { patchEstadoTrabajo } from "./controllers/trabajo/patchTrabajoEstado.js";
 import { patchTrabajoPrestadorAsignado } from "./controllers/trabajo/patchTrabajoPrestadorAsignado.js";
+import { patchTrabajoCalificacion } from "./controllers/trabajo/patchTrabajoCalificacion.js";
 
 const app = express();
 const port = process.env.PORT || 3050;
@@ -101,6 +102,8 @@ app.patch("/trabajo-estado/:idTrabajo", validarToken, patchEstadoTrabajo);
 app.patch("/trabajo-prestador-asignado/:idTrabajo", validarToken, patchTrabajoPrestadorAsignado);
 // Obtener id de prestador por token
 app.get("/prestador-id/:token", obtenerPrestadorByToken);
+// Calificar un trabajo
+app.patch("/trabajo-calificacion/:idTrabajo", patchTrabajoCalificacion);
 
 
 

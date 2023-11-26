@@ -11,6 +11,12 @@ export async function esMiTrabajoConsumidor(req, res) {
 
     const id = decoded.idConsumidor;
 
+    if (!id) {
+        return res.status(200).json({
+            msg: false,
+        });
+    }
+
     return await Trabajo.findOne({ where: { id: idTrabajo, consumidorId: id } })
 
         .then((trabajo) => {
@@ -36,6 +42,12 @@ export async function esMiTrabajoPrestador(req, res) {
     const decoded = Jwt.verify(token, process.env.JWT_SECRET);
 
     const id = decoded.idPrestador;
+
+    if (!id) {
+        return res.status(200).json({
+            msg: false,
+        });
+    }
 
     return await Trabajo.findOne({ where: { id: idTrabajo, prestadorId: id } })
 
