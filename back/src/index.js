@@ -12,7 +12,7 @@ import { obtenerPrestadores, obtenerPrestadorPorId, obtenerPrestadorByToken } fr
 import { borrarPrestador } from "./controllers/prestador/borrarPrestador.js";
 import { obtenerTiposUsuario } from "./controllers/usuario/obtenerTiposUsuario.js";
 import { crearConsumidor } from "./controllers/consumidor/crearConsumidor.js";
-import { obtenerConsumidorPorId, obtenerConsumidores } from "./controllers/consumidor/getsConsumidor.js";
+import { obtenerConsumidorPorId, obtenerConsumidores, obtenerConsumidorByToken } from "./controllers/consumidor/getsConsumidor.js";
 import { crearTrabajo } from "./controllers/trabajo/crearTrabajo.js";
 import { crearServicio } from "./controllers/servicio/crearServicio.js";
 import { obtenerTrabajos, obtenerTrabajoPorId , obtenerTrabajosByConsumidor, obtenerTrabajosByPrestador} from "./controllers/trabajo/getsTrabajo.js";
@@ -102,6 +102,8 @@ app.patch("/trabajo-estado/:idTrabajo", validarToken, patchEstadoTrabajo);
 app.patch("/trabajo-prestador-asignado/:idTrabajo", validarToken, patchTrabajoPrestadorAsignado);
 // Obtener id de prestador por token
 app.get("/prestador-id/:token", obtenerPrestadorByToken);
+// Obtener id de consumidor por token
+app.get("/consumidor-id/:token", obtenerConsumidorByToken);
 // Calificar un trabajo
 app.patch("/trabajo-calificacion/:idTrabajo", patchTrabajoCalificacion);
 
