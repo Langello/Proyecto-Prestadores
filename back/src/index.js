@@ -20,6 +20,7 @@ import { obtenerTrabajos, obtenerTrabajoPorId, obtenerTrabajosByConsumidor, obte
 import { loginUsuario, getRoles } from "./controllers/usuario/loginUsuario.js";
 import { enviarMensajeAConsumidor, enviarMensajeAPrestador } from "./controllers/mensaje/enviarMensaje.js";
 import { getMensajeConsumidorEnviado, getMensajeConsumidorRecibido, getMensajePrestadorRecibido, getMensajePrestadorEnviado } from "./controllers/mensaje/getMensaje.js";
+import { borrarMensajeConsumidorEnviado, borrarMensajeConsumidorRecibido, borrarMensajePrestadorEnviado, borrarMensajePrestadorRecibido } from "./controllers/mensaje/borrarMensaje.js";
 import { esMiTrabajoConsumidor, esMiTrabajoPrestador } from "./controllers/trabajo/esMiTrabajo.js";
 import { patchEstadoTrabajo } from "./controllers/trabajo/patchTrabajoEstado.js";
 import { patchTrabajoPrestadorAsignado } from "./controllers/trabajo/patchTrabajoPrestadorAsignado.js";
@@ -87,12 +88,20 @@ app.post("/mensaje-a-prestador", validarToken, enviarMensajeAPrestador);
 app.post("/mensaje-a-consumidor", validarToken, enviarMensajeAConsumidor);
 // Obtener mensajes de consumidor enviados
 app.get("/mensaje-consumidor-enviado/:token", getMensajeConsumidorEnviado);
+// Borrar mensaje de consumidor enviado
+app.delete("/mensaje-consumidor-enviado/:token", borrarMensajeConsumidorEnviado);
 // Obtener mensajes de consumidor recibidos
 app.get("/mensaje-consumidor-recibido/:token", getMensajeConsumidorRecibido);
+// Borrar mensaje de consumidor recibido
+app.delete("/mensaje-consumidor-recibido/:token", borrarMensajeConsumidorRecibido);
 // Obtener mensajes de prestador enviados
 app.get("/mensaje-prestador-enviado/:token", getMensajePrestadorEnviado);
+// Borrar mensaje de prestador enviado
+app.delete("/mensaje-prestador-enviado/:token", borrarMensajePrestadorEnviado);
 // Obtener mensajes de prestador recibidos
 app.get("/mensaje-prestador-recibido/:token", getMensajePrestadorRecibido);
+// Borrar mensaje de prestador recibido
+app.delete("/mensaje-prestador-recibido/:token", borrarMensajePrestadorRecibido);
 // Obtener roles para dar permisos
 app.post("/roles", validarToken, getRoles);
 // Saber si soy el dueño de ese trabajo como consumidor

@@ -31,7 +31,7 @@ export async function getMensajeConsumidorRecibido(req, res) {
                 }
             ],
             attributes: {
-                exclude: ['id', 'createdAt', 'updatedAt',
+                exclude: [ 'createdAt', 'updatedAt',
                     'cuilCuit', 'descripcion', 'fotosTrabajosRealizados',
                     'horariosAtencion', 'radioCobertura', 'usuarioId']
             }
@@ -71,7 +71,7 @@ export async function getMensajeConsumidorEnviado(req, res) {
                 }
             ],
             attributes: {
-                exclude: ['id', 'createdAt', 'updatedAt',
+                exclude: [ 'createdAt', 'updatedAt',
                     'cuilCuit', 'descripcion', 'fotosTrabajosRealizados',
                     'horariosAtencion', 'radioCobertura', 'usuarioId']
             }
@@ -112,7 +112,7 @@ export async function getMensajePrestadorRecibido(req, res) {
                 }
             ],
             attributes: {
-                exclude: ['id', 'createdAt', 'updatedAt',
+                exclude: [ 'createdAt', 'updatedAt',
                     'cuilCuit', 'descripcion', 'fotosTrabajosRealizados',
                     'horariosAtencion', 'radioCobertura', 'usuarioId']
             }
@@ -156,7 +156,7 @@ export async function getMensajePrestadorEnviado(req, res) {
                 }
             ],
             attributes: {
-                exclude: ['id', 'createdAt', 'updatedAt',
+                exclude: [ 'createdAt', 'updatedAt',
                     'cuilCuit', 'descripcion', 'fotosTrabajosRealizados',
                     'horariosAtencion', 'radioCobertura', 'usuarioId']
             }
