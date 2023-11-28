@@ -8,7 +8,7 @@ import { obtenerUsuarios, obtenerUsuarioPorId } from "./controllers/usuario/gets
 import { validarToken, validarDisponibilidad, validarIdUsuarioExiste, validarContrasena, validarEmailRepetido, validarFormatoEmail, validarDniRepetido, validarFechaNacimiento, validarCuilCuitRepetido, validarIdUsuarioRepetidoPrestador, validarIdUsuarioRepetidoConsumidor } from "./controllers/validaciones.js";
 import { crearPrestador } from "./controllers/prestador/crearPrestador.js";
 import { actualizarPrestador } from "./controllers/prestador/actualizarPrestador.js";
-import { obtenerPrestadores, obtenerPrestadorPorId, obtenerPrestadorByToken } from "./controllers/prestador/getsPrestador.js";
+import { obtenerPrestadores, obtenerPrestadorPorId, obtenerPrestadorByToken, obtenerPromedioCalificacion } from "./controllers/prestador/getsPrestador.js";
 import { borrarPrestador } from "./controllers/prestador/borrarPrestador.js";
 import { obtenerTiposUsuario } from "./controllers/usuario/obtenerTiposUsuario.js";
 import { crearConsumidor } from "./controllers/consumidor/crearConsumidor.js";
@@ -56,6 +56,8 @@ app.post("/prestador", validarToken, validarIdUsuarioRepetidoPrestador, validarC
 app.get("/prestador", obtenerPrestadores);
 // Obtener prestador por ID
 app.get("/prestador/:idPrestador", obtenerPrestadorPorId);
+// Obtener promedio de calificacion de prestador
+app.get("/promedio-calificacion/:idPrestador", obtenerPromedioCalificacion);
 // Borrar prestador
 app.delete("/prestador/:idPrestador", borrarPrestador);
 // Actualizar prestador
