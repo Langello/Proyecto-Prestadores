@@ -1,9 +1,13 @@
 import { Prestador } from "../../models/prestadorMODEL.js";
+import Jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export async function actualizarPrestador(req, res) {
-    const idPrestador = req.params.idPrestador;
 
     const {
+        token,
         cuil_cuit,
         descripcion,
         fotos_trabajos_realizados,
@@ -12,26 +16,37 @@ export async function actualizarPrestador(req, res) {
         radio_cobertura,
     } = req.body;
 
-    try {
-        const prestador = await Prestador.findByPk(idPrestador);
-        if (!prestador) {
-            return res.status(404).json({ msg: "Prestador no encontrado" });
+    const decoded = Jwt.verify(token, process.env.JWT_SECRET);
+
+    const idPrestador = decoded.idPrestador;
+
+    return await Prestador.update(
+        {
+            cuil_cuit,
+            descripcion,
+            fotos_trabajos_realizados,
+            horarios_atencion,
+            disponibilidad,
+            radio_cobertura,
+        },
+        {
+            where: { id: idPrestador },
         }
+    )
+        .then((prestador) => {
+            if (!prestador) {
+                return res.status(404).json({
+                    msg: "Prestador no encontrado",
+                });
+            }
 
-        prestador.cuil_cuit = cuil_cuit;
-        prestador.descripcion = descripcion;
-        prestador.fotos_trabajos_realizados = fotos_trabajos_realizados;
-        prestador.horarios_atencion = horarios_atencion;
-        prestador.disponibilidad = disponibilidad;
-        prestador.radio_cobertura = radio_cobertura;
+            res.status(200).json({
+                msg: "Cuenta actualizada con exito",
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+            res.status(500).json(error);
+        })
 
-        await prestador.save();
-
-        res.status(200).json({ msg: "Prestador actualizado" });
-    }
-
-    catch (error) {
-        console.log(error);
-        res.status(500).json({ msg: "Error al actualizar el prestador: " + error });
-    }
 }

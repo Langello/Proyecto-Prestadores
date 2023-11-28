@@ -13,9 +13,10 @@ import { borrarPrestador } from "./controllers/prestador/borrarPrestador.js";
 import { obtenerTiposUsuario } from "./controllers/usuario/obtenerTiposUsuario.js";
 import { crearConsumidor } from "./controllers/consumidor/crearConsumidor.js";
 import { obtenerConsumidorPorId, obtenerConsumidores, obtenerConsumidorByToken } from "./controllers/consumidor/getsConsumidor.js";
+import { putConsumidor } from "./controllers/consumidor/putConsumidor.js";
 import { crearTrabajo } from "./controllers/trabajo/crearTrabajo.js";
 import { crearServicio } from "./controllers/servicio/crearServicio.js";
-import { obtenerTrabajos, obtenerTrabajoPorId , obtenerTrabajosByConsumidor, obtenerTrabajosByPrestador} from "./controllers/trabajo/getsTrabajo.js";
+import { obtenerTrabajos, obtenerTrabajoPorId, obtenerTrabajosByConsumidor, obtenerTrabajosByPrestador } from "./controllers/trabajo/getsTrabajo.js";
 import { loginUsuario, getRoles } from "./controllers/usuario/loginUsuario.js";
 import { enviarMensajeAConsumidor, enviarMensajeAPrestador } from "./controllers/mensaje/enviarMensaje.js";
 import { getMensajeConsumidorEnviado, getMensajeConsumidorRecibido, getMensajePrestadorRecibido, getMensajePrestadorEnviado } from "./controllers/mensaje/getMensaje.js";
@@ -50,20 +51,22 @@ app.get("/usuario/:token", obtenerUsuarioPorId);
 app.get("/tipos-usuario", obtenerTiposUsuario);
 // Crear prestador
 app.post("/prestador", validarToken, validarIdUsuarioRepetidoPrestador, validarCuilCuitRepetido, validarDisponibilidad, crearPrestador);
-// Actualizar prestador
-app.put("/prestador/:idPrestador", validarCuilCuitRepetido, actualizarPrestador);
 // Obtener prestadores
 app.get("/prestador", obtenerPrestadores);
 // Obtener prestador por ID
 app.get("/prestador/:idPrestador", obtenerPrestadorPorId);
 // Borrar prestador
 app.delete("/prestador/:idPrestador", borrarPrestador);
+// Actualizar prestador
+app.put("/prestador", validarToken, actualizarPrestador);
 // Crear consumidor
 app.post("/consumidor", validarToken, validarIdUsuarioRepetidoConsumidor, crearConsumidor);
 // Obtener consumidor por ID
 app.get("/consumidor/:idConsumidor", obtenerConsumidorPorId);
 // Obtener consumidores
 app.get("/consumidor", obtenerConsumidores);
+// Actualizar consumidor
+app.put("/consumidor", validarToken, putConsumidor);
 // Crear trabajo
 app.post("/trabajo", crearTrabajo);
 // Crear servicio
@@ -83,7 +86,7 @@ app.post("/mensaje-a-prestador", validarToken, enviarMensajeAPrestador);
 // Mensaje de prestador a consumidor
 app.post("/mensaje-a-consumidor", validarToken, enviarMensajeAConsumidor);
 // Obtener mensajes de consumidor enviados
-app.get("/mensaje-consumidor-enviado/:token",  getMensajeConsumidorEnviado);
+app.get("/mensaje-consumidor-enviado/:token", getMensajeConsumidorEnviado);
 // Obtener mensajes de consumidor recibidos
 app.get("/mensaje-consumidor-recibido/:token", getMensajeConsumidorRecibido);
 // Obtener mensajes de prestador enviados
@@ -93,9 +96,9 @@ app.get("/mensaje-prestador-recibido/:token", getMensajePrestadorRecibido);
 // Obtener roles para dar permisos
 app.post("/roles", validarToken, getRoles);
 // Saber si soy el dueño de ese trabajo como consumidor
-app.post("/es-mi-trabajo-consumidor",  validarToken ,esMiTrabajoConsumidor);
+app.post("/es-mi-trabajo-consumidor", validarToken, esMiTrabajoConsumidor);
 // Saber si soy el dueño de ese trabajo como prestador
-app.post("/es-mi-trabajo-prestador",  validarToken ,esMiTrabajoPrestador);
+app.post("/es-mi-trabajo-prestador", validarToken, esMiTrabajoPrestador);
 // Cambiar estado de trabajo
 app.patch("/trabajo-estado/:idTrabajo", validarToken, patchEstadoTrabajo);
 // Asignar prestador a trabajo

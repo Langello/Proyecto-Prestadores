@@ -1,6 +1,8 @@
 import { Trabajo } from "../../models/trabajoMODEL.js";
 import { Estados } from "../../models/estadoMODEL.js";
 import { Calificacion } from "../../models/calificacionMODEL.js";
+import { Usuario } from "../../models/usuarioMODEL.js";
+import { Prestador } from "../../models/prestadorMODEL.js";
 import { Sequelize } from "sequelize";
 import { Op } from "sequelize";
 import Jwt from "jsonwebtoken";
@@ -149,6 +151,24 @@ export async function obtenerTrabajoPorId(req, res) {
                 attributes: {
                     exclude: ['createdAt', 'updatedAt']
                 }
+            },
+            {
+                model: Prestador,
+                attributes: {
+                    exclude: ['cuilCuit',  'descripcion', 'fotosTrabajosRealizados', 'telefono',
+                        'createdAt', 'updatedAt', 'radioCobertura',
+                        'password', 'usuarioId', 'fechaNacimiento']
+                },
+                include: [
+                    {
+                        model: Usuario,
+                        attributes: {
+                            exclude: ['id', 'dni', 'email', 'telefono',
+                                'createdAt', 'updatedAt', 'tipoId', 'fotoPerfil',
+                                'password', 'tipoDni', 'fechaNacimiento',]
+                        }
+                    }
+                ]
             }
         ],
         attributes: {
