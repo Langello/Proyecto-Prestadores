@@ -25,6 +25,7 @@ import { esMiTrabajoConsumidor, esMiTrabajoPrestador } from "./controllers/traba
 import { patchEstadoTrabajo } from "./controllers/trabajo/patchTrabajoEstado.js";
 import { patchTrabajoPrestadorAsignado } from "./controllers/trabajo/patchTrabajoPrestadorAsignado.js";
 import { patchTrabajoCalificacion } from "./controllers/trabajo/patchTrabajoCalificacion.js";
+import { getDocumentacion } from "./controllers/documentacion.js";
 
 const app = express();
 const port = process.env.PORT || 3050;
@@ -37,7 +38,8 @@ app.use(express.urlencoded({ extended: false })); // Configuramos el middleware 
 // Conexión a la base de datos
 autenticar();
 
-// Rutas 
+// Rutas
+app.get("/", getDocumentacion);
 // Crear usuario
 app.post("/usuario", validarEmailRepetido, validarFormatoEmail, validarDniRepetido, validarContrasena, validarFechaNacimiento, crearUsuario);
 // Borrar usuario
