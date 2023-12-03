@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import "./dbVercel.js";
 import { autenticar } from "./db.js";
 import { crearUsuario } from "./controllers/usuario/crearUsuario.js";
 import { borrarUsuario } from "./controllers/usuario/borrarUsuario.js";
