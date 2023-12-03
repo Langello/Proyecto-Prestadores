@@ -31,7 +31,7 @@ const app = express();
 const port = process.env.PORT || 3050;
 
 
-app.use(cors()); // Configurar CORS.
+app.use(cors()); // Configurar CORS
 app.use(express.json()); // Configuramos el middleware para analizar el cuerpo de las solicitudes con contenido JSON
 app.use(express.urlencoded({ extended: false })); // Configuramos el middleware para analizar el cuerpo de las solicitudes con contenido codificado en URL
 
