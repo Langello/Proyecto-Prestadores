@@ -35,7 +35,7 @@ app.use(cors()); // Configurar CORS.
 app.use(express.json()); // Configuramos el middleware para analizar el cuerpo de las solicitudes con contenido JSON
 app.use(express.urlencoded({ extended: false })); // Configuramos el middleware para analizar el cuerpo de las solicitudes con contenido codificado en URL
 
-// Conexión a la base de datos
+// Conexión a la base de datos.
 autenticar();
 
 // Rutas
