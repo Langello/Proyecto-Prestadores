@@ -31,7 +31,6 @@ const Usuario = sequelize.define('usuario', {
     type: DataTypes.STRING,
     field: 'tipo_dni',
     allowNull: false,
-    unique: true
   },
   tipoId: {
     type: DataTypes.INTEGER,
