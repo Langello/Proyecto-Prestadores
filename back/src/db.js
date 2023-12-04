@@ -28,7 +28,7 @@
 // export { sequelize, autenticar };
 
 
-// Base de datos en la nube con VERCEL (postgres)
+// Base de datos en la nube con VERCEL (postgres).
 import Sequelize from 'sequelize';
 import dotenv from 'dotenv'; 
 
