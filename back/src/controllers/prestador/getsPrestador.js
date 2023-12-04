@@ -24,7 +24,7 @@ export async function obtenerPrestadores(req, res) {
         //         { "$Usuario.email$": { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
         //         { descripcion: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
         //     ]
-        // }
+        //}
     })
         .then((prestadores) => {
             res.status(200).json(prestadores);
