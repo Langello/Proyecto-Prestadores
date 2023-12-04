@@ -31,8 +31,11 @@ import { crearTipo } from "./controllers/usuario/crearTipo.js";
 const app = express();
 const port = process.env.PORT || 3050;
 
+const corsOptions = {
+    origin: "https://7csx60ms-4200.brs.devtunnels.ms/",
+}
 
-app.use(cors()); // Configurar CORS.
+app.use(cors(corsOptions)); // Configurar CORS.
 app.use(express.json()); // Configuramos el middleware para analizar el cuerpo de las solicitudes con contenido JSON
 app.use(express.urlencoded({ extended: false })); // Configuramos el middleware para analizar el cuerpo de las solicitudes con contenido codificado en URL
 
