@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
-import "./dbVercel.js";
-import { autenticar } from "./db.js";
+import "./db.js";
 import { crearUsuario } from "./controllers/usuario/crearUsuario.js";
 import { borrarUsuario } from "./controllers/usuario/borrarUsuario.js";
 import { actualizarUsuario } from "./controllers/usuario/actualizarUsuario.js";
@@ -27,6 +26,7 @@ import { patchEstadoTrabajo } from "./controllers/trabajo/patchTrabajoEstado.js"
 import { patchTrabajoPrestadorAsignado } from "./controllers/trabajo/patchTrabajoPrestadorAsignado.js";
 import { patchTrabajoCalificacion } from "./controllers/trabajo/patchTrabajoCalificacion.js";
 import { getDocumentacion } from "./controllers/documentacion.js";
+import { crearTipo } from "./controllers/usuario/crearTipo.js";
 
 const app = express();
 const port = process.env.PORT || 3050;
@@ -36,8 +36,7 @@ app.use(cors()); // Configurar CORS.
 app.use(express.json()); // Configuramos el middleware para analizar el cuerpo de las solicitudes con contenido JSON
 app.use(express.urlencoded({ extended: false })); // Configuramos el middleware para analizar el cuerpo de las solicitudes con contenido codificado en URL
 
-// Conexión a la base de datos.
-autenticar();
+
 
 // Rutas
 app.get("/", getDocumentacion);
@@ -123,6 +122,8 @@ app.get("/prestador-id/:token", obtenerPrestadorByToken);
 app.get("/consumidor-id/:token", obtenerConsumidorByToken);
 // Calificar un trabajo
 app.patch("/trabajo-calificacion/:idTrabajo", patchTrabajoCalificacion);
+// Crear tipo de usuario
+app.post("/tipo", crearTipo);
 
 
 
