@@ -1,6 +1,9 @@
 import Sequelize from 'sequelize';
+import dotenv from 'dotenv'; 
 
-const sequelize = new Sequelize( 'postgres://default:1SaFKRtWgw4d@ep-proud-king-11044566-pooler.us-east-1.postgres.vercel-storage.com:5432/verceldb', {
+dotenv.config();
+
+const sequelize = new Sequelize( process.env.DB_VERCEL, {
   dialect: 'postgres',
   protocol: 'postgres',
   dialectOptions: {
