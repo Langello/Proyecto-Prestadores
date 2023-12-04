@@ -30,7 +30,8 @@
 
 // Base de datos en la nube con VERCEL (postgres).
 import Sequelize from 'sequelize';
-import dotenv from 'dotenv'; 
+import dotenv from 'dotenv';
+import pg from 'pg';
 
 dotenv.config();
 
@@ -43,6 +44,7 @@ const sequelize = new Sequelize( process.env.DB_VERCEL, {
       rejectUnauthorized: false,
     },
   },
+  dialectModule: pg,
 });
 
 (async () => {
