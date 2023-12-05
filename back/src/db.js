@@ -56,6 +56,8 @@ const sequelize = new Sequelize( process.env.DB_VERCEL, {
     //await sequelize.sync({ alter: true });
     // crear todo de cero
     //await sequelize.sync({ force: true });
+    // crear la tablas que me faltan
+    //await sequelize.sync();
   } catch (error) {
     console.error('Error al conectar a la base de datos', error);
   }
