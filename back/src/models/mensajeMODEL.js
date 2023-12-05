@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import { sequelize } from '../db.js';
 import { Prestador } from './prestadorMODEL.js';
 import { Consumidor } from './consumidorMODEL.js';
-import { Usuario } from './usuarioMODEL.js';
+
 
 const MensajeAPrestador = sequelize.define('mensajes_a_prestadores', {
     asunto: {
@@ -14,7 +14,7 @@ const MensajeAPrestador = sequelize.define('mensajes_a_prestadores', {
         allowNull: false,
     },
     idOrigen: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         field: 'id_origen',
         references: {
@@ -23,7 +23,7 @@ const MensajeAPrestador = sequelize.define('mensajes_a_prestadores', {
         }
     },
     idDestino: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         field: 'id_destino',
         references: {
@@ -52,7 +52,7 @@ const MensajeAConsumidor = sequelize.define('mensajes_a_consumidores', {
         allowNull: false,
     },
     idOrigen: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         field: 'id_origen',
         references: {
@@ -61,7 +61,7 @@ const MensajeAConsumidor = sequelize.define('mensajes_a_consumidores', {
         }
     },
     idDestino: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         field: 'id_destino',
         references: {

@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import "./db.js";
+// import { autenticar } from "./db.js";
 import { crearUsuario } from "./controllers/usuario/crearUsuario.js";
 import { borrarUsuario } from "./controllers/usuario/borrarUsuario.js";
 import { actualizarUsuario } from "./controllers/usuario/actualizarUsuario.js";
@@ -27,7 +28,7 @@ import { patchTrabajoPrestadorAsignado } from "./controllers/trabajo/patchTrabaj
 import { patchTrabajoCalificacion } from "./controllers/trabajo/patchTrabajoCalificacion.js";
 import { getDocumentacion } from "./controllers/documentacion.js";
 import { crearTipo } from "./controllers/usuario/crearTipo.js";
-import { autenticar } from "./db.js";
+
 
 const app = express();
 const port = process.env.PORT || 3050;
@@ -41,7 +42,7 @@ app.use(express.json()); // Configuramos el middleware para analizar el cuerpo d
 app.use(express.urlencoded({ extended: false })); // Configuramos el middleware para analizar el cuerpo de las solicitudes con contenido codificado en URL
 
 //base de datos
-autenticar();
+// autenticar();
 
 // Rutas
 app.get("/", getDocumentacion);

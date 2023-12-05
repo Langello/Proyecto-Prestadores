@@ -3,8 +3,7 @@ import { Estados } from "../../models/estadoMODEL.js";
 import { Calificacion } from "../../models/calificacionMODEL.js";
 import { Usuario } from "../../models/usuarioMODEL.js";
 import { Prestador } from "../../models/prestadorMODEL.js";
-import { Sequelize } from "sequelize";
-import { Op } from "sequelize";
+import { Sequelize, Op } from "sequelize";
 import Jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
@@ -29,13 +28,13 @@ export async function obtenerTrabajos(req, res) {
         ],
         where: {
             [Op.or]: [
-                { nombre: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
-                { tareas: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
-                { lugar: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
-                { rangoHorario: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } }
+                { nombre: { [Op.iLike]: `%${filtro}%` } },
+                { tareas: { [Op.iLike]: `%${filtro}%` } },
+                { lugar: { [Op.iLike]: `%${filtro}%`} },
+                { rangoHorario: { [Op.iLike]: `%${filtro}%` } }
             ],
             [Op.and]: [
-                { "$Estado.id$": 6 }, // El 6 es el id del estado "Publicado"
+                { '$estado.id$': 6 }, // El 6 es el id del estado "Publicado"
             ]
         },
         attributes: {

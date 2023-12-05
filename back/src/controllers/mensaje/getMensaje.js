@@ -3,10 +3,12 @@ import { MensajeAPrestador } from "../../models/mensajeMODEL.js";
 import { Consumidor } from "../../models/consumidorMODEL.js";
 import { Prestador } from "../../models/prestadorMODEL.js";
 import { Usuario } from "../../models/usuarioMODEL.js";
+import { Sequelize, Op } from "sequelize";
 
 
 import Jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { literal } from "sequelize";
 
 dotenv.config();
 
@@ -37,7 +39,7 @@ export async function getMensajeConsumidorRecibido(req, res) {
             }
         }],
         where: {
-            idDestino: id
+            consumidorId: id
         },
     })
 

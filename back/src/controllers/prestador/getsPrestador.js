@@ -16,15 +16,13 @@ export async function obtenerPrestadores(req, res) {
 
     return await Prestador.findAll({
         include: [Usuario],
-        // where: {
-        //     [Op.or]: [
-        //         { "$Usuario.nombre$": { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
-        //         { horarios_atencion: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
-        //         { "$Usuario.apellido$": { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
-        //         { "$Usuario.email$": { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
-        //         { descripcion: { [Op.like]: Sequelize.literal(`LOWER("%${filtro}%")`) } },
-        //     ]
-        //}
+        where: {
+            [Op.or]: [
+                { '$usuario.nombre$': { [Op.iLike]: `%${filtro}%` } },
+                { '$usuario.apellido$': { [Op.iLike]: `%${filtro}%` } },
+                { descripcion: { [Op.iLike]: `%${filtro}%` } }
+            ]
+        },
     })
         .then((prestadores) => {
             res.status(200).json(prestadores);
@@ -33,7 +31,6 @@ export async function obtenerPrestadores(req, res) {
             res.status(500).json(error);
         });
 }
-
 export async function obtenerPrestadorPorId(req, res) {
     const { idPrestador } = req.params;
 
