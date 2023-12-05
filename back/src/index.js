@@ -34,7 +34,7 @@ const app = express();
 const port = process.env.PORT || 3050;
 
 const corsOptions = {
-    origin: "https://proservice.vercel.app/",
+    origin: "https://proservice.vercel.app",
 }
 
 app.use(cors(corsOptions)); // Configurar CORS.
