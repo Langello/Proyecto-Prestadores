@@ -27,7 +27,12 @@ export async function enviarMensajeAPrestador(req, res) {
             })
         })
         .catch((error) => {
-            res.status(500).json(error);
+            res.status(500).json(
+                {
+                    error: error,
+                    msg: 'Error al enviar el correo'
+                }
+            );
         })
 }
 
@@ -42,7 +47,7 @@ export async function enviarMensajeAConsumidor(req, res) {
             msg: 'Cuenta no válida'
         })
     }
-    
+
     return await MensajeAConsumidor.create({
         asunto,
         mensaje,
@@ -55,7 +60,12 @@ export async function enviarMensajeAConsumidor(req, res) {
             })
         })
         .catch((error) => {
-            res.status(500).json(error);
+            res.status(500).json(
+                {
+                    error: error,
+                    msg: 'Error al enviar el correo'
+                }
+            );
         })
 }
 
