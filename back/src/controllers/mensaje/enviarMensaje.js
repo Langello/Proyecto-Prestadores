@@ -30,7 +30,7 @@ export async function enviarMensajeAPrestador(req, res) {
             res.status(500).json(
                 {
                     error: error,
-                    msg: 'Error al enviar el correo'
+                    msg: 'Error al enviar el mensaje'
                 }
             );
         })
@@ -63,7 +63,7 @@ export async function enviarMensajeAConsumidor(req, res) {
             res.status(500).json(
                 {
                     error: error,
-                    msg: 'Error al enviar el correo'
+                    msg: 'Error al enviar el mensaje'
                 }
             );
         })

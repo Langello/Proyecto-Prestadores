@@ -18,7 +18,7 @@ const MensajeAPrestador = sequelize.define('mensajes_a_prestadores', {
         allowNull: false,
         field: 'id_origen',
         references: {
-            model: Prestador,
+            model: Consumidor,
             key: 'id',
         }
     },
@@ -27,7 +27,7 @@ const MensajeAPrestador = sequelize.define('mensajes_a_prestadores', {
         allowNull: false,
         field: 'id_destino',
         references: {
-            model: Consumidor,
+            model: Prestador,
             key: 'id',
         }
     }
@@ -56,7 +56,7 @@ const MensajeAConsumidor = sequelize.define('mensajes_a_consumidores', {
         allowNull: false,
         field: 'id_origen',
         references: {
-            model: Consumidor,
+            model: Prestador,
             key: 'id',
         }
     },
@@ -65,7 +65,7 @@ const MensajeAConsumidor = sequelize.define('mensajes_a_consumidores', {
         allowNull: false,
         field: 'id_destino',
         references: {
-            model: Prestador,
+            model: Consumidor,
             key: 'id',
         }
     },
