@@ -33,13 +33,13 @@ export async function getMensajeConsumidorRecibido(req, res) {
                 }
             ],
             attributes: {
-                exclude: [ 'createdAt', 'updatedAt',
+                exclude: ['createdAt', 'updatedAt',
                     'cuilCuit', 'descripcion', 'fotosTrabajosRealizados',
                     'horariosAtencion', 'radioCobertura', 'usuarioId']
             }
         }],
         where: {
-            consumidorId: id
+            idDestino: id
         },
     })
 
@@ -73,7 +73,7 @@ export async function getMensajeConsumidorEnviado(req, res) {
                 }
             ],
             attributes: {
-                exclude: [ 'createdAt', 'updatedAt',
+                exclude: ['createdAt', 'updatedAt',
                     'cuilCuit', 'descripcion', 'fotosTrabajosRealizados',
                     'horariosAtencion', 'radioCobertura', 'usuarioId']
             }
@@ -99,7 +99,7 @@ export async function getMensajePrestadorRecibido(req, res) {
     const decoded = Jwt.verify(token, process.env.JWT_SECRET);
 
     const id = decoded.idPrestador
-    
+
     return await MensajeAPrestador.findAll({
         include: [{
             model: Consumidor,
@@ -109,12 +109,12 @@ export async function getMensajePrestadorRecibido(req, res) {
                     {
                         exclude: ['id', 'dni', 'email', 'telefono',
                             'createdAt', 'updatedAt', 'tipoDni', 'tipoId',
-                             'password', 'fotoPerfil', 'fechaNacimiento']
+                            'password', 'fotoPerfil', 'fechaNacimiento']
                     }
                 }
             ],
             attributes: {
-                exclude: [ 'createdAt', 'updatedAt',
+                exclude: ['createdAt', 'updatedAt',
                     'cuilCuit', 'descripcion', 'fotosTrabajosRealizados',
                     'horariosAtencion', 'radioCobertura', 'usuarioId']
             }
@@ -139,8 +139,8 @@ export async function getMensajePrestadorEnviado(req, res) {
     const { token } = req.params;
 
     const decoded = Jwt.verify(token, process.env.JWT_SECRET);
-    
-    
+
+
 
     const id = decoded.idPrestador
 
@@ -153,12 +153,12 @@ export async function getMensajePrestadorEnviado(req, res) {
                     {
                         exclude: ['id', 'dni', 'email', 'telefono',
                             'createdAt', 'updatedAt', 'tipoDni', 'tipoId',
-                            'sexoId', 'password', 'fotoPerfil', 'fechaNacimiento' ]
+                            'sexoId', 'password', 'fotoPerfil', 'fechaNacimiento']
                     }
                 }
             ],
             attributes: {
-                exclude: [ 'createdAt', 'updatedAt',
+                exclude: ['createdAt', 'updatedAt',
                     'cuilCuit', 'descripcion', 'fotosTrabajosRealizados',
                     'horariosAtencion', 'radioCobertura', 'usuarioId']
             }
